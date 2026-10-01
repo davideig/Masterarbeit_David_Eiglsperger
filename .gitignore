@@ -32,6 +32,9 @@ Final Paper/*.lot
 Final Paper/*.run.xml
 Final Paper/*.toc
 
+# PNG copies the figure generators write next to each PDF (thesis uses the PDFs)
+Final Paper/figures/*.png
+
 # OS noise
 .DS_Store
 
