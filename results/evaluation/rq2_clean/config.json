@@ -1,0 +1,77 @@
+{
+  "repo_root": ".",
+  "target_tz": "Europe/Berlin",
+  "test_start": "2026-02-01T00:00:00+01:00",
+  "test_end": "2026-07-31T23:45:00+02:00",
+  "skip_dates": [
+    "2026-02-07",
+    "2026-06-19"
+  ],
+  "frequency": "15min",
+  "n_periods": 96,
+  "y_true_column": "y_true",
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "prediction_intervals": [
+    [
+      0.1,
+      0.9
+    ],
+    [
+      0.25,
+      0.75
+    ]
+  ],
+  "significance_level": 0.05,
+  "point_forecasts": [
+    {
+      "name": "N_dm1",
+      "path": "/Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/price_forecast_results/pricebase/naive/n_dm1/forecast.csv",
+      "kind": "point",
+      "value_column": "y_pred",
+      "y_true_column": "y_true",
+      "quantile_columns": null
+    },
+    {
+      "name": "N_dm7",
+      "path": "/Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/price_forecast_results/pricebase/naive/n_dm7/forecast.csv",
+      "kind": "point",
+      "value_column": "y_pred",
+      "y_true_column": "y_true",
+      "quantile_columns": null
+    },
+    {
+      "name": "P_base",
+      "path": "/Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/price_forecast_results/pricebase/stage4_oos/oos_pbase_c2_d70/forecast.csv",
+      "kind": "point",
+      "value_column": "y_pred",
+      "y_true_column": "y_true",
+      "quantile_columns": null
+    },
+    {
+      "name": "P_gen",
+      "path": "/Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/price_forecast_results/pricebase/stage4_oos/oos_pgen_c2_d70_clean/forecast.csv",
+      "kind": "point",
+      "value_column": "y_pred",
+      "y_true_column": "y_true",
+      "quantile_columns": null
+    },
+    {
+      "name": "P_gen_nowea",
+      "path": "/Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/price_forecast_results/pricebase/stage4_oos/oos_pgen_nowea_c2_d70_clean/forecast.csv",
+      "kind": "point",
+      "value_column": "y_pred",
+      "y_true_column": "y_true",
+      "quantile_columns": null
+    }
+  ],
+  "quantile_forecasts": [],
+  "output_dir": "/Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/evaluation/rq2_clean",
+  "validate_inputs": true,
+  "run_gw_tests": true
+}

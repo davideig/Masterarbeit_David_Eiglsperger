@@ -1,0 +1,27 @@
+kind: icon_aggregate
+config:
+  repo_root: "."
+  lsdf_base: /Volumes/iip-projects/energy/climateData/icon_by_Max_Kleinebrahm
+  output_parent: data/processed/icon_aggregated_mastr_wind_c100_run06
+  shapefile_path: data/shapefile/ne_10m_admin_0_countries.shp
+
+  cluster_source: mastr_wind
+  n_clusters: 100
+  capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  capacity_weighted_aggregation: true
+  cluster_output_file: data/clustering/icon_d2_mastr_wind_c100.csv
+
+  start_date: "2026-07-01"
+  only_run_hour: "06"
+  skip_existing_output: true
+
+  variables:
+    - t_2m
+    - td_2m
+    - p
+    - u_10m
+    - v_10m
+    - vmax_10m
+    - tot_prec
+    - h_snow
+    - snow_gsp

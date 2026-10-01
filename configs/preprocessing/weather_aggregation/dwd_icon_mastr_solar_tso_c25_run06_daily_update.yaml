@@ -1,0 +1,29 @@
+kind: load_forecast_model
+config:
+  repo_root: "."
+  weather_source: dwd_icon
+  icon_dir: data/processed/icon_aggregated_mastr_solar_tso_c25_run06
+  required_run: "06"
+  dwd_folder_offset_date: "2025-10-26"
+
+  dwd_icon_auto_update: true
+  dwd_icon_catch_up_missing_days: false
+  dwd_icon_raw_dir: data/raw/dwd_icon_daily
+  dwd_icon_base_url: https://opendata.dwd.de/weather/nwp/icon-d2/grib/
+  dwd_icon_aggregation_n_clusters: 25
+  dwd_icon_aggregation_cluster_source: mastr_solar_tso
+  dwd_icon_aggregation_cluster_output_file: data/clustering/icon_d2_mastr_solar_tso_c25.csv
+  dwd_icon_aggregation_capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  dwd_icon_aggregation_capacity_weighted: true
+  dwd_icon_download_variables:
+    - t_2m
+    - td_2m
+    - p
+    - u_10m
+    - v_10m
+    - vmax_10m
+    - aswdir_s
+    - aswdifd_s
+    - tot_prec
+    - h_snow
+    - snow_gsp

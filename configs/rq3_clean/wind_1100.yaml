@@ -1,0 +1,64 @@
+kind: renewable_generation_model
+config:
+  repo_root: .
+  target_tz: Europe/Berlin
+  country_code_entsoe: DE_LU
+  entsoe_api_key_env: ENTSOE_API_KEY
+  entsoe_start_date: '2025-01-01'
+  entsoe_end_date: '2026-07-31'
+  actual_generation_file: data/processed/renewable_generation/actual_generation_2025_20260731.csv
+  renewable_proxy_file: data/processed/renewable_proxy/dwd_icon_mastr_wind_c100_run06_regional_renewable_features.csv
+  extra_renewable_proxy_files:
+  - data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_wind_hub_p80_provider_common_regional_renewable_features.csv
+  extra_renewable_proxy_ensemble_mode: summary
+  extra_renewable_proxy_ensemble_prefix: icond2r06p80_
+  extra_renewable_proxy_ensemble_stats:
+  - mean
+  unavailability_file: data/processed/renewable_generation/generation_unavailability_2025_2026.csv
+  include_dwd_cluster_features: false
+  include_unavailability: false
+  include_proxy_lag_diff_features: true
+  proxy_lag_diff_feature_patterns:
+  - wind
+  - proxy
+  - speed
+  nwp_lag_steps:
+  - 4
+  nwp_lead_steps:
+  - 4
+  nwp_diff_steps:
+  - 4
+  include_wind_direction_regime_features: true
+  include_wind_high_regime_features: true
+  wind_high_regime_speed_thresholds_m_s:
+  - 15.0
+  - 20.0
+  - 25.0
+  wind_high_regime_proxy_thresholds_mw:
+  - 40000.0
+  - 55000.0
+  - 65000.0
+  target_feature_mode: technology_specific
+  rolling_bias_correction_window_days: 30
+  rolling_bias_correction_group: mtu
+  rolling_bias_correction_min_observations: 24
+  rolling_bias_correction_shrinkage: 0.8
+  target_columns:
+  - Wind_Onshore_Actual_MW
+  - Wind_Offshore_Actual_MW
+  model_type: hist_gradient_boosting
+  train_days_rolling: 180
+  min_train_days: 20
+  target_availability_lag_days: 1
+  target_availability_cutoff_hour: 9
+  target_availability_cutoff_minute: 15
+  test_start: '2025-11-23'
+  test_end: '2026-07-31'
+  hgb_max_iter: 900
+  hgb_learning_rate: 0.015
+  hgb_max_leaf_nodes: 9
+  hgb_min_samples_leaf: 60
+  hgb_l2_regularization: 8.0
+  hgb_max_features: 0.8
+  random_state: 42
+  export_dir: results/renewable_generation_results/rq3_clean/wind_1100_limit0915_warmup

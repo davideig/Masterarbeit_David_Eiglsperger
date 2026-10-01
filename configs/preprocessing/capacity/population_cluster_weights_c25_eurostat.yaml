@@ -1,0 +1,25 @@
+kind: population_cluster_weights
+config:
+  repo_root: "."
+  source_url: https://gisco-services.ec.europa.eu/grid/grid_1km.parquet
+  raw_file: data/raw/population/gisco_grid_1km.parquet
+  cluster_file: data/clustering/icon_d2_clustering_c25.parquet
+  output_file: data/processed/load_forecast/weather_cluster_population_weights_c25.csv
+  region_output_file: data/processed/load_forecast/weather_cluster_population_region_weights_c25.csv
+
+  country_codes: [DE, LU]
+  country_column: CNTR_ID
+  population_column: TOT_P_2021
+  x_column: X_LLC
+  y_column: Y_LLC
+  cell_size_m: 1000.0
+  region_column: NUTS2021_1
+
+  cluster_lon_column: lon
+  cluster_lat_column: lat
+  cluster_id_column: cluster_id
+  cluster_crs_epsg: 4326
+  population_crs_epsg: 3035
+  matching_mode: nearest_grid_point
+  force_download: false
+  timeout_seconds: 120

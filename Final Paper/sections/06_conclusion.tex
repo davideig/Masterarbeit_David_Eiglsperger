@@ -1,0 +1,54 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+The main contribution of this thesis is a set of fully operational forecasting
+models for load, solar, and wind generation based exclusively on open data, the
+OBTF models. They are released as part of an open pipeline that enforces
+forecast-time information availability and that others can rerun and reuse.
+Their daily submission to the Energy-Arena benchmark
+\cite{kleinebrahm2026energyarena} lets anyone verify their accuracy beyond
+the test period of this thesis. In
+contrast to the \mbox{ENTSO-E} forecasts, whose methods are not disclosed, their
+inputs and construction are fully open. Each model is either more accurate than its
+\mbox{ENTSO-E} counterpart, as for load, or admissible before gate closure when
+the \mbox{ENTSO-E} forecast is not, as for solar and wind. Used as explicit
+inputs, the OBTF forecasts improve the operational day-ahead price forecast for
+the \mbox{DE-LU} bidding zone, in which every input must be available before the
+12:00 gate closure. The models can therefore be reused as admissible,
+transparent inputs in other operational applications.
+
+For RQ1, the OBTF load forecast is more accurate than the published
+\mbox{ENTSO-E} forecast in the operational setting, reducing the load RMSE by
+36.0\%. The OBTF solar and wind forecasts are less accurate than the
+\mbox{ENTSO-E} forecasts, but those benchmarks are not published before gate
+closure and cannot be used in an operational price forecast.
+
+For RQ2, adding the OBTF load, combined renewable-generation, and
+residual-load forecasts to the price model lowers the day-ahead price RMSE by
+11.2\%, a statistically significant improvement. The weather-free variant is
+statistically indistinguishable in accuracy, so the raw weather fields add no detectable accuracy once these
+forecasts are included, which makes them a compact representation of the
+weather-driven system state for the price model.
+
+For RQ3, price accuracy improves as the morning progresses, but gradually. Up to 11:00 the error falls by 5.6\% without a statistically significant step,
+which may partly reflect that the backtest uses the same weather run at all
+cutoffs. The only significant gain follows at gate closure once the EXAA price
+becomes admissible. That
+the earlier-clearing EXAA price captures most of the achievable accuracy at 12:00
+is a known property of this market rather than a result of this thesis
+\cite{eiser2026operational}. Before any market price is available, the forecast
+rests on price lags, weather, the OBTF forecasts, and the
+reserve-market results.
+
+The findings are relevant beyond the market and period studied here. Day-ahead
+prices depend strongly on weather-driven load and renewable generation
+\cite{sensfuss2008meritOrder,pape2016fundamentals}, and the corresponding public
+forecasts are either less accurate than the OBTF forecast or unavailable before
+gate closure. Turning open weather data into admissible load and
+renewable-generation forecasts is therefore valuable in other bidding zones with
+the same gate-closure constraint. In a field where forecasts are often produced by
+undisclosed models and evaluated retrospectively, such an open and continuously
+benchmarked pipeline offers a transparent operational baseline that others can
+reproduce, extend, and compare against. The thesis is thus a step toward
+day-ahead price forecasting that is operational, open, and explicit about what
+information it uses and when.

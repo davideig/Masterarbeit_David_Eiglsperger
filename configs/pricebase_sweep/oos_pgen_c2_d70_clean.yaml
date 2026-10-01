@@ -1,0 +1,52 @@
+kind: lear_operational
+plot: false
+config:
+  repo_root: .
+  target_tz: Europe/Berlin
+  post_regime_start: '2025-10-01T00:00:00+02:00'
+  country_code_entsoe: DE_LU
+  entsoe_api_key_env: ENTSOE_API_KEY
+  dwd_folder_offset_date: '2025-10-26'
+  start_folder_date: '2025-10-25'
+  required_run: '06'
+  use_vst: true
+  weather_source: DWD
+  variant: fundamental
+  lars_start_date: '2027-01-01T00:00:00+01:00'
+  price_model_type: lightgbm
+  lgbm_subsample: 1.0
+  lgbm_colsample_bytree: 0.8
+  lgbm_min_child_samples: 8
+  random_state: 42
+  include_load_forecast_features: true
+  add_calendar_features: true
+  entsoe_start_date: '2025-10-01T00:00:00+02:00'
+  entsoe_end_date: '2026-07-31T23:45:00+02:00'
+  test_start: '2026-02-01T00:00:00+01:00'
+  test_end: '2026-07-31T23:45:00+02:00'
+  lgbm_num_leaves: 7
+  lgbm_n_estimators: 300
+  lgbm_learning_rate: 0.03
+  lgbm_reg_lambda: 5.0
+  icon_dir: data/processed/icon_aggregated_c2_run06
+  n_clusters: 2
+  train_days_rolling: 70
+  # P_gen: frozen P_base weather/hyperparameters + self-generated fundamentals.
+  # load_forecast_file replaces the ENTSO-E day-ahead forecast with the own hybrid
+  # load model; the two proxy files add self-generated solar and wind, and because
+  # load_forecast + renewable_generation_proxy are both selected the residual-load
+  # feature RL_hat is derived automatically.
+  features:
+    covariates:
+      - load_forecast
+      - renewable_generation_proxy
+    load_forecast_file: results/load_forecast_results/hybrid_entsoe_residual_open_meteo_p10_morning1015_daily_weather_lightgbm_price_warmup_d70_nov23febjul_tw224_f180_pop_weighted_quantiles_clean/forecast.csv
+    load_forecast_column: Load_Model_MW
+    renewable_proxy_files:
+      - results/renewable_generation_results/dwd_icon_mastr_solar_tso_c25_run06_tso_components_cloud_geometry_physics_residual_own_region_daylight_suspicious_totalbias_hgb_solar_bias45_hour_s075_d90_cutoff1000_price_warmup_d70_nov23febjul/forecast.csv
+      - results/renewable_generation_results/hybrid_dwd_mastr_wind_c100_icond2only_run06_onoff_split_wind_hub_p80_common_hgb_wind_struct_minleaf60_maxfeat08_bias30_mtu_s08_d180_cutoff1000_min20_price_warmup_d70_nov23febjul/forecast.csv
+    renewable_proxy_columns:
+      - Renewable_Solar_Proxy_MW
+      - Renewable_Wind_Proxy_MW
+      - Renewable_Total_Proxy_MW
+  export_dir: results/price_forecast_results/pricebase/stage4_oos/oos_pgen_c2_d70_clean

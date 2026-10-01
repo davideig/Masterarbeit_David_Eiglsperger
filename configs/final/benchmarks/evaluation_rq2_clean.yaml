@@ -1,0 +1,32 @@
+kind: evaluation
+config:
+  repo_root: "."
+  target_tz: Europe/Berlin
+  test_start: "2026-02-01T00:00:00+01:00"
+  test_end: "2026-07-31T23:45:00+02:00"
+  frequency: 15min
+  n_periods: 96
+  skip_dates:
+    - "2026-02-07"   # no ICON-D2 run with wind fields archived (wind forecast invalid)
+    - "2026-06-19"   # ICON weather unavailable, so P_base/P_gen have no forecast that day
+  y_true_column: y_true
+  significance_level: 0.05
+  output_dir: results/evaluation/rq2_clean
+  validate_inputs: true
+  run_gw_tests: true
+  point_forecasts:
+    - name: N_dm1
+      kind: point
+      path: results/price_forecast_results/pricebase/naive/n_dm1/forecast.csv
+    - name: N_dm7
+      kind: point
+      path: results/price_forecast_results/pricebase/naive/n_dm7/forecast.csv
+    - name: P_base
+      kind: point
+      path: results/price_forecast_results/pricebase/stage4_oos/oos_pbase_c2_d70/forecast.csv
+    - name: P_gen
+      kind: point
+      path: results/price_forecast_results/pricebase/stage4_oos/oos_pgen_c2_d70_clean/forecast.csv
+    - name: P_gen_nowea
+      kind: point
+      path: results/price_forecast_results/pricebase/stage4_oos/oos_pgen_nowea_c2_d70_clean/forecast.csv

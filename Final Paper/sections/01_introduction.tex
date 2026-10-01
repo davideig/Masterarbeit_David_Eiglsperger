@@ -1,0 +1,146 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Day-ahead electricity price forecasts support short-term electricity market
+decisions \cite{weron2014electricity,lago2021forecasting}. In the coordinated
+European day-ahead market, orders must be submitted before gate closure at
+12:00 CET/CEST\footnote{All clock times in this thesis refer to Central European
+Time or Central European Summer Time, the local time of the \mbox{DE-LU} market.}
+on the day before delivery
+\cite{epexSpotPowerMarket,epexSpotMarketCoupling}. A price forecast for this
+setting must therefore be created before this deadline. The same timing rule
+also matters in historical backtests, because using information that was not
+yet observable at the forecast creation time would introduce data leakage.
+
+Load, solar, and wind generation are central inputs for such price
+forecasts. Demand affects scarcity, while solar and wind generation reduce the
+residual demand that has to be served by conventional plants
+\cite{pape2016fundamentals,do2021residualDemand}. Through the merit-order
+effect, generation with low short-run marginal costs can displace more
+expensive units and reduce spot prices \cite{sensfuss2008meritOrder}. For this
+reason, empirical price forecasting models often include load, renewable
+generation, weather, and calendar information
+\cite{weron2014electricity,lago2021forecasting,maciejowska2021enhancing}.
+Some studies bring weather information into the price model directly. For
+example, \textcite{ludwig2015bigdata} use a broad set of German weather
+variables, and \textcite{sgarlato2023weatherPredictions} use meteorological
+forecasts such as wind, irradiation, cloud cover, and temperature to forecast
+German electricity prices.
+
+However, several price-forecasting studies for the Germany-Luxembourg bidding
+zone (\mbox{DE-LU}) use day-ahead load forecasts published through the European Network of Transmission System Operators for
+Electricity (\mbox{ENTSO-E}) Transparency Platform as price-model inputs
+\cite{trebbien2023probabilistic,marcjasz2023distributional,uniejewski2025smoothing,hilger2024multivariate,eiser2026operational},
+and several also use the \mbox{ENTSO-E}-published solar and wind forecasts
+instead of direct weather variables
+\cite{trebbien2023probabilistic,marcjasz2023distributional,hilger2024multivariate}.
+These published forecasts compress weather-sensitive system conditions into
+expected load, solar, and wind generation, so a price model that
+relies on them implicitly assumes that they are accurate, observable in time,
+and sufficiently complete. They are, however, effectively black boxes:
+mandatory transparency data reported by system operators through undisclosed
+models and information sets rather than reproducible specifications
+\cite{euRegulation543_2013,entsoeTransparency}. How good these forecasts are compared
+with forecasts that are transparent and reproducible from open data, and what
+they are worth for price forecasting, can therefore only be judged by
+benchmarking them.
+
+Timing is the second problem, and it decides whether a published forecast can be
+used at all. For load, the
+\mbox{ENTSO-E} day-ahead forecast is public before gate closure and can enter
+forecast runs conducted after its publication \cite{euRegulation543_2013}. The
+\mbox{ENTSO-E} solar and wind forecasts, by contrast, are used as price-model
+inputs in several \mbox{DE-LU} studies
+\cite{trebbien2023probabilistic,marcjasz2023distributional,hilger2024multivariate}
+but are not publicly observable before the 12:00 gate closure, with a
+publication requirement no later than 18:00 on day \(d-1\)
+\cite{kleinebrahm2026energyarena,entsoeTransparency,euRegulation543_2013}. For
+an operationally valid backtest, each input must be observable at the forecast
+creation time. These forecasts can therefore serve as quality benchmarks but
+not as pre-gate-closure inputs.
+This is the operational gap addressed here, which this thesis fills with solar
+and wind forecasts generated from open data before gate closure.
+
+Because admissibility depends on public observability at the forecast creation
+time, the information set is itself a central design choice. This thesis defines a
+strict operational information set for each hourly forecast creation time
+from 07:00 to 12:00 on day \(d-1\). These sets become richer towards gate
+closure as newer weather runs, more recent
+realized system data, reserve-market auction results, and the public load
+forecast become observable.
+
+\phantomsection
+\label{sec:research_questions}
+These considerations lead to three research questions (RQ1 to RQ3):
+
+\begin{description}
+  \setlength{\itemsep}{0.15em}
+  \setlength{\parsep}{0pt}
+  \setlength{\topsep}{0.25em}
+  \item[\textbf{RQ1:}]\hypertarget{rq:component_forecast_quality}{}
+  How do fully transparent, open-data-based forecasts of load, solar, and wind generation compare with the corresponding
+  \mbox{ENTSO-E} forecasts?
+
+  \item[\textbf{RQ2:}]\hypertarget{rq:price_impact_generated_forecasts}{}
+  How does an explicit representation of load and renewable-generation
+  forecasts affect electricity price forecasts?
+
+  \item[\textbf{RQ3:}]\hypertarget{rq:cutoff_sensitivity}{}
+  How does electricity price forecast performance change with richer
+  information sets over time?
+\end{description}
+
+The following hypotheses make these questions testable:
+
+\begin{description}
+  \setlength{\itemsep}{0.15em}
+  \setlength{\parsep}{0pt}
+  \setlength{\topsep}{0.25em}
+  \item[\textbf{H1:}]\hypertarget{hyp:component_forecast_quality}{}
+  The self-generated load forecast has lower or comparable forecast errors than the
+  \mbox{ENTSO-E} load forecast, while the self-generated solar and wind forecasts
+  have higher errors than the corresponding \mbox{ENTSO-E} forecasts.
+
+  \item[\textbf{H2:}]\hypertarget{hyp:price_impact_generated_forecasts}{}
+  Adding explicit self-generated load and renewable-generation forecasts improves
+  electricity price forecast quality, relative to a baseline price model that
+  uses the published \mbox{ENTSO-E} load forecast and represents renewable
+  generation only through raw meteorological inputs.
+
+  \item[\textbf{H3:}]\hypertarget{hyp:cutoff_sensitivity}{}
+  Price forecast accuracy improves as the forecast creation time moves closer to
+  gate closure and the admissible information set expands during the morning
+  before delivery.
+\end{description}
+
+The intuition behind H1 is an asymmetry in information. For load, the public
+forecast is available before gate closure \cite{euRegulation543_2013}, so
+the self-generated forecast can correct it with newer weather runs and more
+recent realized load. For solar and wind, no public forecast is available before
+gate closure that could be corrected in this way. The self-generated forecasts must rely on open weather and capacity
+data alone, whereas the \mbox{ENTSO-E} forecasts are produced by the system
+operators with undisclosed models and inputs and may be issued as late as 18:00
+on day \(d-1\) \cite{euRegulation543_2013,entsoeTransparency}, so higher errors
+are expected for these two targets.
+
+The central contribution of this thesis is a set of fully operational forecasting
+models for load, solar, and wind generation based exclusively on open data,
+referred to as operational boosted-tree forecasting (OBTF). The
+models are released as part of an open pipeline that is ready for operational
+use and that others can rerun and reuse. Their forecasts, together with the resulting price forecasts, are
+submitted every day to the open Energy-Arena benchmark
+\cite{kleinebrahm2026energyarena}, so their accuracy can be verified
+independently and continuously, also beyond the test period. In contrast to
+the \mbox{ENTSO-E} forecasts, whose methods are not disclosed, the inputs and
+construction of these models are fully open. By construction, each model
+is admissible before gate closure, so it can be used where the corresponding
+\mbox{ENTSO-E} forecast cannot, as for solar and wind. The benchmarking in RQ1
+further shows the OBTF load model to be even more accurate than the \mbox{ENTSO-E}
+load forecast. The price forecast is one application that demonstrates their
+operational value.
+
+The remainder of the thesis is structured as follows. Chapter~\ref{sec:literature}
+reviews related work, Chapter~\ref{sec:methodology} describes the data,
+models, and evaluation design, Chapter~\ref{sec:results} presents the results,
+and Chapters~\ref{sec:discussion} and~\ref{sec:conclusion} discuss and
+conclude the thesis.

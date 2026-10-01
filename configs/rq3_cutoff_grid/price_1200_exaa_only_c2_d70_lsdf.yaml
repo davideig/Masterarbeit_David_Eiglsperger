@@ -1,0 +1,30 @@
+kind: lear_operational
+plot: false
+config:
+  repo_root: .
+  target_tz: Europe/Berlin
+  post_regime_start: "2025-10-01T00:00:00+02:00"
+  country_code_entsoe: DE_LU
+  entsoe_api_key_env: ENTSOE_API_KEY
+  entsoe_price_file: data/processed/lear/entsoe_day_ahead_prices.csv
+  entsoe_exaa_price_file: data/processed/lear/entsoe_exaa_prices.csv
+  use_vst: true
+  weather_source: DWD
+  variant: exaa_only
+  lars_start_date: "2027-01-01T00:00:00+01:00"
+  price_model_type: lightgbm
+  lgbm_subsample: 1.0
+  lgbm_colsample_bytree: 0.8
+  lgbm_min_child_samples: 8
+  random_state: 42
+  add_calendar_features: true
+  entsoe_start_date: "2025-10-01T00:00:00+02:00"
+  entsoe_end_date: "2026-07-31T23:45:00+02:00"
+  test_start: "2025-12-01T00:00:00+01:00"
+  test_end: "2026-07-31T23:45:00+02:00"
+  lgbm_num_leaves: 7
+  lgbm_n_estimators: 300
+  lgbm_learning_rate: 0.03
+  lgbm_reg_lambda: 5.0
+  train_days_rolling: 70
+  export_dir: results/price_forecast_results/rq3_cutoff_grid/price_1200_exaa_only_c2_d70_lsdf

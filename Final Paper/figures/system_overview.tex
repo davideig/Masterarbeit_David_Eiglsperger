@@ -1,0 +1,107 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize]
+
+% ---------------- stage 1: data sources ----------------
+\node[fgdata=2.7cm, minimum height=1.95cm] (wx)  at (0, 3.1)
+  {\textbf{Weather forecasts}\\ICON-D2 from\\DWD, Open-Meteo};
+\node[fgdata=2.7cm, minimum height=1.95cm] (ent) at (0, 1.03)
+  {\textbf{\mbox{ENTSO-E} data}\\prices, load, generation,\\load forecast};
+\node[fgdata=2.7cm, minimum height=1.95cm] (mkt) at (0,-1.03)
+  {\textbf{Market data}\\reserve auctions,\\EXAA prices};
+\node[fgdata=2.7cm, minimum height=1.95cm] (geo) at (0,-3.1)
+  {\textbf{Geodata}\\MaStR capacity,\\Eurostat population};
+
+% ---------------- stage 2: input assembly ----------------
+\node[fgproc=1.9cm, minimum height=7.9cm] (asm) at (3.2, 0)
+  {\textbf{Assembly of the admissible information set}\\[6pt]
+   only inputs observable at the forecast creation time \(t \le\) 12:00};
+
+% ---------------- stage 3: component models ----------------
+\node[fgproc=2.75cm] (mload) at (6.2, 2.35)
+  {\textbf{OBTF}\\\textbf{load model}\\direct, or correction of the \mbox{ENTSO-E} forecast};
+\node[fgproc=2.75cm] (msol)  at (6.2, 0)
+  {\textbf{OBTF}\\\textbf{solar model}\\capacity-weighted\\weather};
+\node[fgproc=2.75cm] (mwind) at (6.2,-2.35)
+  {\textbf{OBTF}\\\textbf{wind model}\\hub-height wind fields};
+
+% ---------------- stage 4: component forecasts ----------------
+\node[fgout=1.25cm] (fl) at (8.9, 2.35) {\(\hat{L}_{d,q|d-1}\)\\load};
+\node[fgout=1.25cm] (fs) at (8.9, 0)    {\(\hat{S}_{d,q|d-1}\)\\solar};
+\node[fgout=1.25cm] (fw) at (8.9,-2.35) {\(\hat{W}_{d,q|d-1}\)\\wind};
+\begin{scope}[on background layer]
+  \node[fggroup, fit=(fl)(fs)(fw)] (grp) {};
+\end{scope}
+% ---------------- stage 5: price model and forecast ----------------
+\node[fgproc=2.2cm] (mprice) at (11.8, 0)
+  {\textbf{Price model}};
+\node[fgout=1.6cm] (fp) at (11.8,-2.35)
+  {\(\hat{P}_{d,q|d-1}\)\\price forecast};
+
+% ---------------- stage 6: evaluation and deployment ----------------
+\node[fgdata=2.7cm, minimum height=1.45cm] (post) at (0,-5.1)
+  {\textbf{Realized values}};
+\node[fgdata=2.7cm, minimum height=1.45cm] (postent) at (0,-6.8)
+  {\textbf{\mbox{ENTSO-E} solar and\\wind forecasts}};
+\node[fgeval=3.7cm] (eval) at (4.4,-5.95)
+  {\textbf{Thesis evaluation}\\1~Feb to 31~Jul~2026\\RMSE, MAE, Giacomini--White tests\\for RQ1, RQ2, and RQ3};
+\node[fgext=4.3cm] (arena) at (10.4,-5.95)
+  {\textbf{Energy-Arena}\\daily submission before 12:00,\\scored against realized outcomes\\on a public leaderboard};
+
+% ---------------- flows ----------------
+\foreach \s in {wx, ent, mkt, geo}
+  \draw[fgflow] (\s.east) -- (\s.east -| asm.west);
+\draw[fgflow] (asm.east |- mload) -- (mload.west);
+\draw[fgflow] (asm.east |- msol)  -- (msol.west);
+\draw[fgflow] (asm.east |- mwind) -- (mwind.west);
+\draw[fgflow] (mload.east) -- (fl.west);
+\draw[fgflow] (msol.east)  -- (fs.west);
+\draw[fgflow] (mwind.east) -- (fw.west);
+\draw[fgflow] (fl.east) -- ([yshift=4pt]mprice.west);
+\draw[fgflow] (fs.east) -- (mprice.west);
+\draw[fgflow] (fw.east) -- ([yshift=-4pt]mprice.west);
+\draw[fgflow] (mprice.south) -- (fp.north);
+
+% direct price-model inputs (top channel)
+\draw[fgflow] (asm.north) -- ++(0,0.5) -| (mprice.north);
+
+% forecasts to evaluation and benchmark (bus)
+\coordinate (bus) at (0,-4.4);
+\draw[thick, draw=fgLine] (grp.south) -- (grp.south |- bus);
+\draw[thick, draw=fgLine] (fp.south)  -- (fp.south |- bus);
+\draw[thick, draw=fgLine] (5.4,0 |- bus) -- (fp.south |- bus);
+\draw[fgflow] (5.4,0 |- bus) -- (5.4,0 |- eval.north);
+\draw[fgflow] (arena.north |- bus) -- (arena.north);
+\draw[fgflow] (post.east) -- (post.east -| eval.west);
+\draw[fgflow] (postent.east) -- (postent.east -| eval.west);
+
+% ---------------- legend (two rows) ----------------
+\begin{scope}[shift={(0.2,-8.5)}]
+  \node[fgdata=0.3cm, minimum height=0.42cm] (k1) at (0,0) {};
+  \node[right=3pt of k1, font=\scriptsize] {data source};
+  \node[fgproc=0.35cm, minimum height=0.32cm] (k2) at (4.3,0) {};
+  \node[right=3pt of k2, font=\scriptsize] {process or model};
+  \node[fgout=0.3cm, minimum height=0.32cm] (k3) at (8.9,0) {};
+  \node[right=3pt of k3, font=\scriptsize] {forecast (data product)};
+  \node[fgeval=0.25cm, minimum height=0.32cm] (k4) at (0,-0.62) {};
+  \node[right=3pt of k4, font=\scriptsize] {evaluation};
+  \node[fgext=0.3cm, minimum height=0.32cm] (k5) at (4.3,-0.62) {};
+  \node[right=3pt of k5, font=\scriptsize] {external platform};
+  \node[fgrq=0.35cm, minimum height=0.32cm, rounded corners=2pt] (k6) at (8.9,-0.62) {};
+  \node[right=3pt of k6, font=\scriptsize] {RQ};
+  \node[fgout=0.3cm, minimum height=0.32cm, fgvar] (k7) at (0,-1.24) {};
+  \draw[fgaux] ([xshift=3pt]k7.east) -- ++(0.55,0) coordinate (k7a);
+  \node[right=2pt of k7a, font=\scriptsize] {dashed: variant or benchmark};
+  \draw[fgflow] (8.65,-1.24) -- ++(0.55,0) coordinate (k8a);
+  \node[right=2pt of k8a, font=\scriptsize] {data flow};
+\end{scope}
+
+\end{tikzpicture}%
+}
+\caption[Overview of the complete setup of the thesis.]
+{Overview of the complete setup of the thesis, from the open data sources
+through the forecasting models to the evaluation and the daily submission. The
+legend applies to all process diagrams in this thesis.}
+\label{fig:system_overview}
+\end{figure}

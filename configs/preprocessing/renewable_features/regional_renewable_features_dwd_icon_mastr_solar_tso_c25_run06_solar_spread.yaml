@@ -1,0 +1,28 @@
+kind: regional_renewable_features
+config:
+  repo_root: "."
+  weather_source: dwd_icon
+  target_tz: Europe/Berlin
+
+  icon_dir: data/processed/icon_aggregated_mastr_solar_tso_c25_run06
+  capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  cluster_file: data/clustering/icon_d2_mastr_solar_tso_c25.csv
+  capacity_map_file: data/processed/renewable_proxy/dwd_icon_mastr_solar_tso_c25_run06_solar_spread_regional_capacity_map.csv
+  capacity_timeseries_file: data/processed/renewable_proxy/dwd_icon_mastr_solar_tso_c25_run06_solar_capacity_per_tso_monthly.csv
+  weather_weights_file: data/processed/renewable_proxy/dwd_icon_mastr_solar_tso_c25_run06_solar_weather_weights_per_tso.csv
+  capacity_artifact_technologies:
+    - solar
+  output_file: data/processed/renewable_proxy/dwd_icon_mastr_solar_tso_c25_run06_solar_spread_regional_renewable_features.csv
+
+  start_folder_date: "2025-10-25"
+  required_run: "06"
+  dwd_folder_offset_date: "2025-10-26"
+  skip_dates:
+    - "2025-10-26"
+    - "2025-10-27"
+    - "2025-10-28"
+
+  solar_region_strategy: state_tso_proxy
+  include_cluster_features: false
+  include_spatial_spread_features: true
+  include_ramps: true

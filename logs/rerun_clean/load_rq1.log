@@ -1,0 +1,204 @@
+
+--- Building Load Forecast Dataset ---
+Dataset: 41,088 rows, 268 columns
+
+--- Rolling Direct Load Forecast ---
+  2026-02-01  lightgbm/global  5.6s
+  2026-02-02  lightgbm/global  5.7s
+  2026-02-03  lightgbm/global  7.2s
+  2026-02-04  lightgbm/global  6.0s
+  2026-02-05  lightgbm/global  5.6s
+  2026-02-06  lightgbm/global  5.5s
+  2026-02-07  lightgbm/global  5.7s
+  2026-02-08  lightgbm/global  5.8s
+  2026-02-09  lightgbm/global  5.8s
+  2026-02-10  lightgbm/global  5.8s
+  2026-02-11  lightgbm/global  5.7s
+  2026-02-12  lightgbm/global  5.7s
+  2026-02-13  lightgbm/global  5.8s
+  2026-02-14  lightgbm/global  5.9s
+  2026-02-15  lightgbm/global  5.8s
+  2026-02-16  lightgbm/global  6.0s
+  2026-02-17  lightgbm/global  7.5s
+  2026-02-18  lightgbm/global  5.8s
+  2026-02-19  lightgbm/global  5.6s
+  2026-02-20  lightgbm/global  5.8s
+  2026-02-21  lightgbm/global  5.9s
+  2026-02-22  lightgbm/global  7.2s
+  2026-02-23  lightgbm/global  7.1s
+  2026-02-24  lightgbm/global  7.1s
+  2026-02-25  lightgbm/global  7.0s
+  2026-02-26  lightgbm/global  6.8s
+  2026-02-27  lightgbm/global  6.7s
+  2026-02-28  lightgbm/global  6.7s
+  2026-03-01  lightgbm/global  6.8s
+  2026-03-02  lightgbm/global  7.2s
+  2026-03-03  lightgbm/global  7.4s
+  2026-03-04  lightgbm/global  7.0s
+  2026-03-05  lightgbm/global  6.8s
+  2026-03-06  lightgbm/global  6.8s
+  2026-03-07  lightgbm/global  7.1s
+  2026-03-08  lightgbm/global  7.3s
+  2026-03-09  lightgbm/global  7.3s
+  2026-03-10  lightgbm/global  6.9s
+  2026-03-11  lightgbm/global  8.6s
+  2026-03-12  lightgbm/global  6.5s
+  2026-03-13  lightgbm/global  7.4s
+  2026-03-14  lightgbm/global  7.2s
+  2026-03-15  lightgbm/global  7.4s
+  2026-03-16  lightgbm/global  6.9s
+  2026-03-17  lightgbm/global  6.8s
+  2026-03-18  lightgbm/global  6.9s
+  2026-03-19  lightgbm/global  7.5s
+  2026-03-20  lightgbm/global  7.4s
+  2026-03-21  lightgbm/global  7.2s
+  2026-03-22  lightgbm/global  7.3s
+  2026-03-23  lightgbm/global  6.8s
+  2026-03-24  lightgbm/global  7.1s
+  2026-03-25  lightgbm/global  9.4s
+  2026-03-26  lightgbm/global  7.3s
+  2026-03-27  lightgbm/global  6.9s
+  2026-03-28  lightgbm/global  6.5s
+  2026-03-29  lightgbm/global  6.4s
+  2026-03-30  lightgbm/global  7.9s
+  2026-03-31  lightgbm/global  7.3s
+  2026-04-01  lightgbm/global  9.5s
+  2026-04-02  lightgbm/global  6.9s
+  2026-04-03  lightgbm/global  6.7s
+  2026-04-04  lightgbm/global  6.7s
+  2026-04-05  lightgbm/global  9.6s
+  2026-04-06  lightgbm/global  7.4s
+  2026-04-07  lightgbm/global  7.3s
+  2026-04-08  lightgbm/global  7.0s
+  2026-04-09  lightgbm/global  6.9s
+  2026-04-10  lightgbm/global  7.3s
+  2026-04-11  lightgbm/global  7.6s
+  2026-04-12  lightgbm/global  7.6s
+  2026-04-13  lightgbm/global  7.2s
+  2026-04-14  lightgbm/global  6.9s
+  2026-04-15  lightgbm/global  7.0s
+  2026-04-16  lightgbm/global  7.6s
+  2026-04-17  lightgbm/global  7.6s
+  2026-04-18  lightgbm/global  7.4s
+  2026-04-19  lightgbm/global  9.0s
+  2026-04-20  lightgbm/global  6.8s
+  2026-04-21  lightgbm/global  6.9s
+  2026-04-22  lightgbm/global  7.6s
+  2026-04-23  lightgbm/global  7.6s
+  2026-04-24  lightgbm/global  7.3s
+  2026-04-25  lightgbm/global  7.1s
+  2026-04-26  lightgbm/global  9.2s
+  2026-04-27  lightgbm/global  7.9s
+  2026-04-28  lightgbm/global  7.5s
+  2026-04-29  lightgbm/global  7.4s
+  2026-04-30  lightgbm/global  6.9s
+  2026-05-01  lightgbm/global  6.9s
+  2026-05-02  lightgbm/global  7.0s
+  2026-05-03  lightgbm/global  7.7s
+  2026-05-04  lightgbm/global  7.5s
+  2026-05-05  lightgbm/global  9.7s
+  2026-05-06  lightgbm/global  7.1s
+  2026-05-07  lightgbm/global  8.6s
+  2026-05-08  lightgbm/global  7.4s
+  2026-05-09  lightgbm/global  7.3s
+  2026-05-10  lightgbm/global  7.2s
+  2026-05-11  lightgbm/global  6.9s
+  2026-05-12  lightgbm/global  6.7s
+  2026-05-13  lightgbm/global  9.3s
+  2026-05-14  lightgbm/global  7.5s
+  2026-05-15  lightgbm/global  7.4s
+  2026-05-16  lightgbm/global  7.0s
+  2026-05-17  lightgbm/global  6.8s
+  2026-05-18  lightgbm/global  7.0s
+  2026-05-19  lightgbm/global  7.6s
+  2026-05-20  lightgbm/global  7.9s
+  2026-05-21  lightgbm/global  7.7s
+  2026-05-22  lightgbm/global  7.2s
+  2026-05-23  lightgbm/global  7.0s
+  2026-05-24  lightgbm/global  7.3s
+  2026-05-25  lightgbm/global  7.8s
+  2026-05-26  lightgbm/global  7.7s
+  2026-05-27  lightgbm/global  7.2s
+  2026-05-28  lightgbm/global  7.1s
+  2026-05-29  lightgbm/global  7.2s
+  2026-05-30  lightgbm/global  7.8s
+  2026-05-31  lightgbm/global  7.7s
+  2026-06-01  lightgbm/global  7.5s
+  2026-06-02  lightgbm/global  7.1s
+  2026-06-03  lightgbm/global  7.0s
+  2026-06-04  lightgbm/global  8.9s
+  2026-06-05  lightgbm/global  8.6s
+  2026-06-06  lightgbm/global  7.5s
+  2026-06-07  lightgbm/global  7.3s
+  2026-06-08  lightgbm/global  7.1s
+  2026-06-09  lightgbm/global  7.0s
+  2026-06-10  lightgbm/global  7.7s
+  2026-06-11  lightgbm/global  7.7s
+  2026-06-12  lightgbm/global  7.6s
+  2026-06-13  lightgbm/global  7.1s
+  2026-06-14  lightgbm/global  7.0s
+  2026-06-15  lightgbm/global  7.3s
+  2026-06-16  lightgbm/global  8.1s
+  2026-06-17  lightgbm/global  8.1s
+  2026-06-18  lightgbm/global  7.8s
+  2026-06-19  lightgbm/global  6.9s
+  2026-06-20  lightgbm/global  7.2s
+  2026-06-21  lightgbm/global  7.2s
+  2026-06-22  lightgbm/global  7.9s
+  2026-06-23  lightgbm/global  9.8s
+  2026-06-24  lightgbm/global  7.3s
+  2026-06-25  lightgbm/global  7.3s
+  2026-06-26  lightgbm/global  7.2s
+  2026-06-27  lightgbm/global  7.6s
+  2026-06-28  lightgbm/global  7.6s
+  2026-06-29  lightgbm/global  7.1s
+  2026-06-30  lightgbm/global  6.9s
+  2026-07-01  lightgbm/global  6.7s
+  2026-07-02  lightgbm/global  7.7s
+  2026-07-03  lightgbm/global  7.6s
+  2026-07-04  lightgbm/global  7.8s
+  2026-07-05  lightgbm/global  7.0s
+  2026-07-06  lightgbm/global  7.0s
+  2026-07-07  lightgbm/global  7.1s
+  2026-07-08  lightgbm/global  7.7s
+  2026-07-09  lightgbm/global  7.5s
+  2026-07-10  lightgbm/global  7.3s
+  2026-07-11  lightgbm/global  6.9s
+  2026-07-12  lightgbm/global  6.8s
+  2026-07-13  lightgbm/global  7.8s
+  2026-07-14  lightgbm/global  7.7s
+  2026-07-15  lightgbm/global  7.4s
+  2026-07-16  lightgbm/global  7.1s
+  2026-07-17  lightgbm/global  7.0s
+  2026-07-18  lightgbm/global  7.3s
+  2026-07-19  lightgbm/global  7.6s
+  2026-07-20  lightgbm/global  7.6s
+  2026-07-21  lightgbm/global  7.0s
+  2026-07-22  lightgbm/global  6.9s
+  2026-07-23  lightgbm/global  6.8s
+  2026-07-24  lightgbm/global  7.6s
+  2026-07-25  lightgbm/global  7.6s
+  2026-07-26  lightgbm/global  7.3s
+  2026-07-27  lightgbm/global  7.2s
+  2026-07-28  lightgbm/global  6.9s
+  2026-07-29  lightgbm/global  7.5s
+  2026-07-30  lightgbm/global  7.6s
+  2026-07-31  lightgbm/global  7.5s
+
+--- Load Forecast Metrics ---
+target     model  period         mae          mse        rmse       r2  nrmse_mean_load_pct        bias  mean_actual_mw  n_obs
+  Load     Model    full 1349.959807 2.981227e+06 1726.623073 0.959265             3.246959   61.089738    53176.618976  17376
+  Load Benchmark    full 2139.779365 7.275444e+06 2697.303094 0.900590             5.072348  741.231618    53176.618976  17376
+  Load     Model 2026-02 1325.516935 2.890165e+06 1700.048495 0.963616             2.769599  574.330467    61382.468453   2688
+  Load Benchmark 2026-02 1960.133941 6.086210e+06 2467.024535 0.923381             4.019103 -381.973662    61382.468453   2688
+  Load     Model 2026-03 1269.900767 2.811099e+06 1676.633209 0.953859             3.052192 -380.478624    54932.110143   2976
+  Load Benchmark 2026-03 1868.787775 5.906561e+06 2430.341790 0.903051             4.424264  705.076382    54932.110143   2976
+  Load     Model 2026-04 1455.878227 3.495216e+06 1869.549621 0.935930             3.613320  335.258366    51740.487371   2880
+  Load Benchmark 2026-04 2333.643710 8.933132e+06 2988.834629 0.836249             5.776588 1841.596538    51740.487371   2880
+  Load     Model 2026-05 1322.402946 2.706444e+06 1645.127306 0.949822             3.380386 -107.761579    48666.844910   2976
+  Load Benchmark 2026-05 2438.753320 9.158442e+06 3026.291745 0.830200             6.218385 1748.104965    48666.844910   2976
+  Load     Model 2026-06 1380.645843 3.167932e+06 1779.868670 0.936641             3.447974  -10.615824    51620.708717   2880
+  Load Benchmark 2026-06 2302.821731 8.067365e+06 2840.310723 0.838652             5.502270  236.865027    51620.708717   2880
+  Load     Model 2026-07 1347.455280 2.830298e+06 1682.348962 0.940839             3.272117   12.005144    51414.691249   2976
+  Load Benchmark 2026-07 1928.663793 5.464886e+06 2337.709556 0.885769             4.546773  208.248928    51414.691249   2976
+Saved load forecast outputs -> /Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/load_forecast_results/hybrid_entsoe_residual_open_meteo_p10_morning1015_daily_weather_lightgbm_paper_febjul_tw224_f180_pop_weighted_quantiles_clean

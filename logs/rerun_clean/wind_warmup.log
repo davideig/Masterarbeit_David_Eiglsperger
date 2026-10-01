@@ -1,0 +1,290 @@
+
+--- Building Renewable Generation Dataset ---
+Dataset: 30,593 rows, 1,293 columns
+
+--- Rolling Renewable Generation Forecast ---
+  2025-11-23  hist_gradient_boosting  43.3s
+  2025-11-24  hist_gradient_boosting  40.9s
+  2025-11-25  hist_gradient_boosting  38.0s
+  2025-11-26  hist_gradient_boosting  41.3s
+  2025-11-27  hist_gradient_boosting  39.7s
+  2025-11-28  hist_gradient_boosting  38.8s
+  2025-11-29  hist_gradient_boosting  42.1s
+  2025-11-30  hist_gradient_boosting  39.3s
+  2025-12-01  hist_gradient_boosting  43.6s
+  2025-12-02  hist_gradient_boosting  42.0s
+  2025-12-03  hist_gradient_boosting  43.6s
+  2025-12-04  hist_gradient_boosting  43.0s
+  2025-12-05  hist_gradient_boosting  43.4s
+  2025-12-06  hist_gradient_boosting  42.8s
+  2025-12-07  hist_gradient_boosting  41.7s
+  2025-12-08  hist_gradient_boosting  45.3s
+  2025-12-09  hist_gradient_boosting  45.9s
+  2025-12-10  hist_gradient_boosting  41.4s
+  2025-12-11  hist_gradient_boosting  47.9s
+  2025-12-12  hist_gradient_boosting  45.2s
+  2025-12-13  hist_gradient_boosting  51.0s
+  2025-12-14  hist_gradient_boosting  53.8s
+  2025-12-15  hist_gradient_boosting  65.9s
+  2025-12-16  hist_gradient_boosting  52.3s
+  2025-12-17  hist_gradient_boosting  51.0s
+  2025-12-18  hist_gradient_boosting  45.3s
+  2025-12-19  hist_gradient_boosting  44.9s
+  2025-12-20  hist_gradient_boosting  43.1s
+  2025-12-21  hist_gradient_boosting  45.4s
+  2025-12-22  hist_gradient_boosting  44.0s
+  2025-12-23  hist_gradient_boosting  44.6s
+  2025-12-24  hist_gradient_boosting  47.1s
+  2025-12-25  hist_gradient_boosting  48.4s
+  2025-12-26  hist_gradient_boosting  50.4s
+  2025-12-27  hist_gradient_boosting  26.5s
+  2025-12-28  hist_gradient_boosting  26.8s
+  2025-12-29  hist_gradient_boosting  33.2s
+  2025-12-30  hist_gradient_boosting  26.5s
+  2025-12-31  hist_gradient_boosting  26.4s
+  2026-01-01  hist_gradient_boosting  25.2s
+  2026-01-02  hist_gradient_boosting  25.8s
+  2026-01-03  hist_gradient_boosting  26.1s
+  2026-01-04  hist_gradient_boosting  25.6s
+  2026-01-05  hist_gradient_boosting  26.8s
+  2026-01-06  hist_gradient_boosting  26.6s
+  2026-01-07  hist_gradient_boosting  26.7s
+  2026-01-08  hist_gradient_boosting  27.4s
+  2026-01-09  hist_gradient_boosting  27.0s
+  2026-01-10  hist_gradient_boosting  27.4s
+  2026-01-11  hist_gradient_boosting  32.2s
+  2026-01-12  hist_gradient_boosting  29.7s
+  2026-01-13  hist_gradient_boosting  31.6s
+  2026-01-14  hist_gradient_boosting  30.9s
+  2026-01-15  hist_gradient_boosting  31.0s
+  2026-01-16  hist_gradient_boosting  28.1s
+  2026-01-17  hist_gradient_boosting  32.7s
+  2026-01-18  hist_gradient_boosting  28.6s
+  2026-01-19  hist_gradient_boosting  31.8s
+  2026-01-20  hist_gradient_boosting  33.5s
+  2026-01-21  hist_gradient_boosting  29.3s
+  2026-01-22  hist_gradient_boosting  31.8s
+  2026-01-23  hist_gradient_boosting  32.9s
+  2026-01-24  hist_gradient_boosting  35.8s
+  2026-01-25  hist_gradient_boosting  39.4s
+  2026-01-26  hist_gradient_boosting  40.5s
+  2026-01-27  hist_gradient_boosting  35.2s
+  2026-01-28  hist_gradient_boosting  31.3s
+  2026-01-29  hist_gradient_boosting  32.2s
+  2026-01-30  hist_gradient_boosting  31.2s
+  2026-01-31  hist_gradient_boosting  34.3s
+  2026-02-01  hist_gradient_boosting  31.7s
+  2026-02-02  hist_gradient_boosting  36.4s
+  2026-02-03  hist_gradient_boosting  32.0s
+  2026-02-04  hist_gradient_boosting  33.1s
+  2026-02-05  hist_gradient_boosting  35.5s
+  2026-02-06  hist_gradient_boosting  37.0s
+  2026-02-07  hist_gradient_boosting  39.1s
+  2026-02-08  hist_gradient_boosting  32.0s
+  2026-02-09  hist_gradient_boosting  32.0s
+  2026-02-10  hist_gradient_boosting  31.7s
+  2026-02-11  hist_gradient_boosting  30.6s
+  2026-02-12  hist_gradient_boosting  29.6s
+  2026-02-13  hist_gradient_boosting  33.3s
+  2026-02-14  hist_gradient_boosting  31.7s
+  2026-02-15  hist_gradient_boosting  37.6s
+  2026-02-16  hist_gradient_boosting  33.3s
+  2026-02-17  hist_gradient_boosting  32.0s
+  2026-02-18  hist_gradient_boosting  33.9s
+  2026-02-19  hist_gradient_boosting  32.2s
+  2026-02-20  hist_gradient_boosting  31.9s
+  2026-02-21  hist_gradient_boosting  34.7s
+  2026-02-22  hist_gradient_boosting  31.9s
+  2026-02-23  hist_gradient_boosting  30.6s
+  2026-02-24  hist_gradient_boosting  32.5s
+  2026-02-25  hist_gradient_boosting  30.8s
+  2026-02-26  hist_gradient_boosting  31.4s
+  2026-02-27  hist_gradient_boosting  30.1s
+  2026-02-28  hist_gradient_boosting  28.8s
+  2026-03-01  hist_gradient_boosting  27.7s
+  2026-03-02  hist_gradient_boosting  29.3s
+  2026-03-03  hist_gradient_boosting  28.1s
+  2026-03-04  hist_gradient_boosting  32.2s
+  2026-03-05  hist_gradient_boosting  30.4s
+  2026-03-06  hist_gradient_boosting  33.5s
+  2026-03-07  hist_gradient_boosting  30.9s
+  2026-03-08  hist_gradient_boosting  31.6s
+  2026-03-09  hist_gradient_boosting  31.8s
+  2026-03-10  hist_gradient_boosting  36.0s
+  2026-03-11  hist_gradient_boosting  31.1s
+  2026-03-12  hist_gradient_boosting  34.5s
+  2026-03-13  hist_gradient_boosting  34.5s
+  2026-03-14  hist_gradient_boosting  30.5s
+  2026-03-15  hist_gradient_boosting  33.5s
+  2026-03-16  hist_gradient_boosting  33.2s
+  2026-03-17  hist_gradient_boosting  30.3s
+  2026-03-18  hist_gradient_boosting  30.2s
+  2026-03-19  hist_gradient_boosting  35.4s
+  2026-03-20  hist_gradient_boosting  33.3s
+  2026-03-21  hist_gradient_boosting  38.3s
+  2026-03-22  hist_gradient_boosting  34.8s
+  2026-03-23  hist_gradient_boosting  33.7s
+  2026-03-24  hist_gradient_boosting  36.4s
+  2026-03-25  hist_gradient_boosting  35.2s
+  2026-03-26  hist_gradient_boosting  35.6s
+  2026-03-27  hist_gradient_boosting  34.5s
+  2026-03-28  hist_gradient_boosting  34.0s
+  2026-03-29  hist_gradient_boosting  33.5s
+  2026-03-30  hist_gradient_boosting  34.2s
+  2026-03-31  hist_gradient_boosting  35.4s
+  2026-04-01  hist_gradient_boosting  33.9s
+  2026-04-02  hist_gradient_boosting  32.6s
+  2026-04-03  hist_gradient_boosting  33.7s
+  2026-04-04  hist_gradient_boosting  37.1s
+  2026-04-05  hist_gradient_boosting  37.0s
+  2026-04-06  hist_gradient_boosting  37.3s
+  2026-04-07  hist_gradient_boosting  35.4s
+  2026-04-08  hist_gradient_boosting  33.5s
+  2026-04-09  hist_gradient_boosting  36.5s
+  2026-04-10  hist_gradient_boosting  31.2s
+  2026-04-11  hist_gradient_boosting  30.8s
+  2026-04-12  hist_gradient_boosting  30.8s
+  2026-04-13  hist_gradient_boosting  30.5s
+  2026-04-14  hist_gradient_boosting  30.1s
+  2026-04-15  hist_gradient_boosting  30.9s
+  2026-04-16  hist_gradient_boosting  38.0s
+  2026-04-17  hist_gradient_boosting  37.2s
+  2026-04-18  hist_gradient_boosting  33.2s
+  2026-04-19  hist_gradient_boosting  36.3s
+  2026-04-20  hist_gradient_boosting  37.2s
+  2026-04-21  hist_gradient_boosting  36.6s
+  2026-04-22  hist_gradient_boosting  36.3s
+  2026-04-23  hist_gradient_boosting  33.4s
+  2026-04-24  hist_gradient_boosting  32.9s
+  2026-04-25  hist_gradient_boosting  34.1s
+  2026-04-26  hist_gradient_boosting  35.9s
+  2026-04-27  hist_gradient_boosting  30.5s
+  2026-04-28  hist_gradient_boosting  31.9s
+  2026-04-29  hist_gradient_boosting  32.4s
+  2026-04-30  hist_gradient_boosting  32.1s
+  2026-05-01  hist_gradient_boosting  35.2s
+  2026-05-02  hist_gradient_boosting  35.1s
+  2026-05-03  hist_gradient_boosting  31.4s
+  2026-05-04  hist_gradient_boosting  33.6s
+  2026-05-05  hist_gradient_boosting  32.7s
+  2026-05-06  hist_gradient_boosting  34.0s
+  2026-05-07  hist_gradient_boosting  34.5s
+  2026-05-08  hist_gradient_boosting  31.9s
+  2026-05-09  hist_gradient_boosting  33.1s
+  2026-05-10  hist_gradient_boosting  31.5s
+  2026-05-11  hist_gradient_boosting  30.6s
+  2026-05-12  hist_gradient_boosting  32.4s
+  2026-05-13  hist_gradient_boosting  31.5s
+  2026-05-14  hist_gradient_boosting  30.0s
+  2026-05-15  hist_gradient_boosting  33.4s
+  2026-05-16  hist_gradient_boosting  31.9s
+  2026-05-17  hist_gradient_boosting  31.3s
+  2026-05-18  hist_gradient_boosting  29.0s
+  2026-05-19  hist_gradient_boosting  30.2s
+  2026-05-20  hist_gradient_boosting  31.0s
+  2026-05-21  hist_gradient_boosting  32.9s
+  2026-05-22  hist_gradient_boosting  33.8s
+  2026-05-23  hist_gradient_boosting  30.6s
+  2026-05-24  hist_gradient_boosting  30.9s
+  2026-05-25  hist_gradient_boosting  30.4s
+  2026-05-26  hist_gradient_boosting  33.1s
+  2026-05-27  hist_gradient_boosting  33.4s
+  2026-05-28  hist_gradient_boosting  32.7s
+  2026-05-29  hist_gradient_boosting  49.5s
+  2026-05-30  hist_gradient_boosting  44.9s
+  2026-05-31  hist_gradient_boosting  37.0s
+  2026-06-01  hist_gradient_boosting  38.7s
+  2026-06-02  hist_gradient_boosting  38.9s
+  2026-06-03  hist_gradient_boosting  39.5s
+  2026-06-04  hist_gradient_boosting  39.4s
+  2026-06-05  hist_gradient_boosting  39.5s
+  2026-06-06  hist_gradient_boosting  39.9s
+  2026-06-07  hist_gradient_boosting  39.3s
+  2026-06-08  hist_gradient_boosting  39.2s
+  2026-06-09  hist_gradient_boosting  37.9s
+  2026-06-10  hist_gradient_boosting  33.2s
+  2026-06-11  hist_gradient_boosting  31.9s
+  2026-06-12  hist_gradient_boosting  34.8s
+  2026-06-13  hist_gradient_boosting  36.1s
+  2026-06-14  hist_gradient_boosting  31.4s
+  2026-06-15  hist_gradient_boosting  32.7s
+  2026-06-16  hist_gradient_boosting  34.7s
+  2026-06-17  hist_gradient_boosting  32.3s
+  2026-06-18  hist_gradient_boosting  33.8s
+  2026-06-19  hist_gradient_boosting  33.4s
+  2026-06-20  hist_gradient_boosting  32.5s
+  2026-06-21  hist_gradient_boosting  29.0s
+  2026-06-22  hist_gradient_boosting  34.2s
+  2026-06-23  hist_gradient_boosting  39.4s
+  2026-06-24  hist_gradient_boosting  39.4s
+  2026-06-25  hist_gradient_boosting  37.5s
+  2026-06-26  hist_gradient_boosting  35.4s
+  2026-06-27  hist_gradient_boosting  35.7s
+  2026-06-28  hist_gradient_boosting  35.9s
+  2026-06-29  hist_gradient_boosting  42.5s
+  2026-06-30  hist_gradient_boosting  42.2s
+  2026-07-01  hist_gradient_boosting  40.7s
+  2026-07-02  hist_gradient_boosting  32.9s
+  2026-07-03  hist_gradient_boosting  43.6s
+  2026-07-04  hist_gradient_boosting  43.6s
+  2026-07-05  hist_gradient_boosting  38.7s
+  2026-07-06  hist_gradient_boosting  32.9s
+  2026-07-07  hist_gradient_boosting  32.5s
+  2026-07-08  hist_gradient_boosting  37.0s
+  2026-07-09  hist_gradient_boosting  35.3s
+  2026-07-10  hist_gradient_boosting  30.5s
+  2026-07-11  hist_gradient_boosting  31.3s
+  2026-07-12  hist_gradient_boosting  34.4s
+  2026-07-13  hist_gradient_boosting  33.8s
+  2026-07-14  hist_gradient_boosting  36.7s
+  2026-07-15  hist_gradient_boosting  34.6s
+  2026-07-16  hist_gradient_boosting  32.6s
+  2026-07-17  hist_gradient_boosting  34.8s
+  2026-07-18  hist_gradient_boosting  33.4s
+  2026-07-19  hist_gradient_boosting  31.1s
+  2026-07-20  hist_gradient_boosting  35.0s
+  2026-07-21  hist_gradient_boosting  34.0s
+  2026-07-22  hist_gradient_boosting  36.6s
+  2026-07-23  hist_gradient_boosting  34.3s
+  2026-07-24  hist_gradient_boosting  33.3s
+  2026-07-25  hist_gradient_boosting  31.8s
+  2026-07-26  hist_gradient_boosting  30.3s
+  2026-07-27  hist_gradient_boosting  31.0s
+  2026-07-28  hist_gradient_boosting  32.1s
+  2026-07-29  hist_gradient_boosting  31.6s
+  2026-07-30  hist_gradient_boosting  29.2s
+  2026-07-31  hist_gradient_boosting  30.3s
+
+--- Renewable Generation Metrics ---
+       target  period         mae          mse        rmse    nrmse  nrmse_pct       r2        bias  installed_capacity_mw  n_obs
+ Wind_Onshore    full 1977.179128 8.921842e+06 2986.945241 0.043170   4.316970 0.892851   71.748353            69190.78143  24096
+ Wind_Onshore 2025-11 2019.702049 6.705013e+06 2589.403942 0.037424   3.742412 0.902332  -98.016122            69190.78143    768
+ Wind_Onshore 2025-12 2287.266985 8.331593e+06 2886.449937 0.041717   4.171726 0.889609   29.538842            69190.78143   2976
+ Wind_Onshore 2026-01 1948.463496 6.178039e+06 2485.566187 0.035923   3.592337 0.929261  104.075324            69190.78143   2976
+ Wind_Onshore 2026-02 2916.676513 2.301228e+07 4797.111543 0.069332   6.933166 0.763350  217.633604            69190.78143   2688
+ Wind_Onshore 2026-03 1646.061177 5.567829e+06 2359.624676 0.034103   3.410317 0.945114   18.322511            69190.78143   2976
+ Wind_Onshore 2026-04 1999.957245 1.238515e+07 3519.253617 0.050863   5.086304 0.816433  196.679930            69190.78143   2880
+ Wind_Onshore 2026-05 1422.479402 3.997407e+06 1999.351720 0.028896   2.889622 0.854085 -102.659857            69190.78143   2976
+ Wind_Onshore 2026-06 1862.905754 6.952466e+06 2636.752885 0.038108   3.810844 0.875391  224.739682            69190.78143   2880
+ Wind_Onshore 2026-07 1810.616438 6.933842e+06 2633.219030 0.038057   3.805737 0.867314  -47.449837            69190.78143   2976
+Wind_Offshore    full  690.466569 8.831630e+05  939.767520 0.090025   9.002516 0.848941    3.028098            10438.94300  24096
+Wind_Offshore 2025-11  533.821977 4.566658e+05  675.770494 0.064736   6.473553 0.877807 -128.433097            10438.94300    768
+Wind_Offshore 2025-12  748.561736 9.048193e+05  951.219889 0.091122   9.112224 0.818653  -16.250631            10438.94300   2976
+Wind_Offshore 2026-01  721.811926 8.636219e+05  929.312602 0.089024   8.902363 0.816759 -170.962085            10438.94300   2976
+Wind_Offshore 2026-02  625.594082 6.541233e+05  808.778918 0.077477   7.747709 0.848103  -19.839473            10438.94300   2688
+Wind_Offshore 2026-03  662.021863 7.584489e+05  870.889708 0.083427   8.342700 0.875091  149.461772            10438.94300   2976
+Wind_Offshore 2026-04  668.261080 1.038732e+06 1019.181999 0.097633   9.763268 0.734182  136.297492            10438.94300   2880
+Wind_Offshore 2026-05  728.329033 1.088527e+06 1043.324869 0.099945   9.994545 0.630379    8.435806            10438.94300   2976
+Wind_Offshore 2026-06  617.367867 7.042261e+05  839.181788 0.080390   8.038954 0.777680   18.633898            10438.94300   2880
+Wind_Offshore 2026-07  782.857063 1.139951e+06 1067.684688 0.102279  10.227900 0.712113  -45.037088            10438.94300   2976
+   Wind_Total    full 2239.285385 1.124296e+07 3353.051786 0.042108   4.210804 0.905263   74.776452            79629.72443  24096
+   Wind_Total 2025-11 2177.011560 8.248844e+06 2872.080153 0.036068   3.606794 0.915295 -226.449219            79629.72443    768
+   Wind_Total 2025-12 2701.009211 1.158891e+07 3404.249352 0.042751   4.275099 0.893524   13.288211            79629.72443   2976
+   Wind_Total 2026-01 2053.048056 6.982024e+06 2642.352021 0.033183   3.318299 0.928780  -66.886762            79629.72443   2976
+   Wind_Total 2026-02 3073.529498 2.578447e+07 5077.841311 0.063768   6.376816 0.790787  197.794131            79629.72443   2688
+   Wind_Total 2026-03 1835.792425 6.595279e+06 2568.127488 0.032251   3.225086 0.954249  167.784283            79629.72443   2976
+   Wind_Total 2026-04 2333.964954 1.746273e+07 4178.843686 0.052478   5.247844 0.815947  332.977422            79629.72443   2880
+   Wind_Total 2026-05 1782.352355 5.817455e+06 2411.940120 0.030289   3.028944 0.857727  -94.224051            79629.72443   2976
+   Wind_Total 2026-06 2147.951425 8.867620e+06 2977.855012 0.037396   3.739627 0.888389  243.373579            79629.72443   2880
+   Wind_Total 2026-07 2083.547049 9.149083e+06 3024.745089 0.037985   3.798513 0.876226  -92.486925            79629.72443   2976
+Saved renewable generation outputs -> /Users/davideiglsperger/Code/DA_Price_Forecasting_Pipeline_DE_LU/results/renewable_generation_results/hybrid_dwd_mastr_wind_c100_icond2only_run06_onoff_split_wind_hub_p80_common_hgb_wind_struct_minleaf60_maxfeat08_bias30_mtu_s08_d180_cutoff1000_min20_price_warmup_d70_nov23febjul

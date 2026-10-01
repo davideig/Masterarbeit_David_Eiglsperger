@@ -1,0 +1,25 @@
+kind: icon_aggregate
+config:
+  repo_root: "."
+  lsdf_base: /Volumes/iip-projects/energy/climateData/icon_by_Max_Kleinebrahm
+  output_parent: data/processed/icon_aggregated_mastr_solar_tso_c25_run06
+  shapefile_path: data/shapefile/ne_10m_admin_0_countries.shp
+
+  cluster_source: mastr_solar_tso
+  n_clusters: 25
+  capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  capacity_weighted_aggregation: true
+  cluster_output_file: data/clustering/icon_d2_mastr_solar_tso_c25.csv
+
+  start_date: "2026-07-01"
+  only_run_hour: "06"
+  skip_existing_output: true
+
+  variables:
+    - aswdir_s
+    - aswdifd_s
+    - t_2m
+    - td_2m
+    - tot_prec
+    - h_snow
+    - snow_gsp

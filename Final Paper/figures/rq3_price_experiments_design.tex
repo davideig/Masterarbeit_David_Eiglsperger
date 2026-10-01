@@ -1,0 +1,42 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+
+% ---- price forecast variants ----
+\node[fgout=3.5cm] (base) at (-4.9, 0)
+  {\textbf{Base forecast}\\\(\hat{P}^{\mathrm{base}}\)\\with the \mbox{ENTSO-E} load forecast};
+\node[fgout=3.5cm] (gen) at (0, 0)
+  {\textbf{Forecast with OBTF inputs}\\\(\hat{P}^{\mathrm{gen}}\)\\with \(\hat{L}\), \(\hat{G}^{\mathrm{ren}}\), \(\widehat{RL}\) instead};
+\node[fgout=3.5cm, fgvar] (wea) at (4.9, 0)
+  {\textbf{Weather-free forecast}\\\(\hat{P}^{\mathrm{gen},-\mathrm{wea}}\)\\without raw weather};
+
+% ---- evaluation row ----
+\node[fgout=2.4cm, fgvar] (naive) at (-4.9,-2.6)
+  {\textbf{Naive benchmarks}\\\(\mathrm{N}_{d-1}\), \(\mathrm{N}_{d-7}\)};
+\node[fgeval=3.6cm] (eval) at (0,-2.6)
+  {\textbf{Evaluation}\\RMSE, MAE, one-sided\\Giacomini--White test};
+\node[fgdata=2.2cm] (real) at (4.9,-2.6)
+  {\textbf{Realized}\\\textbf{day-ahead prices}};
+
+\node[fgrq=6.4cm] (rq) at (0,-4.5)
+  {\textbf{RQ2:} How do explicit load and renewable-generation forecasts
+   affect the day-ahead price forecast?};
+
+% ---- flows ----
+\draw[fgflow] (base.south) -- ++(0,-0.55) -| ([xshift=-0.9cm]eval.north);
+\draw[fgflow] (gen.south) -- (eval.north);
+\draw[fgaux]  (wea.south) -- ++(0,-0.55) -| ([xshift=0.9cm]eval.north);
+\draw[fgaux]  (naive.east) -- (eval.west);
+\draw[fgflow] (real.west) -- (eval.east);
+\draw[fgflow] (eval.south) -- (rq.north);
+
+\end{tikzpicture}
+\caption[Price forecast comparison for RQ2.]
+{Design of RQ2. The base forecast uses price history, calendar
+features, weather, and the \mbox{ENTSO-E} load forecast, while
+\(\hat{P}^{\mathrm{gen}}\) replaces the latter with the OBTF load,
+renewable-generation, and residual-load forecasts. A weather-free variant and two
+naive forecasts serve as secondary comparisons. Notation as in
+Figure~\ref{fig:system_overview}.}
+\label{fig:rq3_price_experiments_design}
+\end{figure}

@@ -1,0 +1,25 @@
+[stream] pgen_nowea: 181 days x 96 MTUs, 969 features
+[stream] pgen_nowea: 10/181 days
+[stream] pgen_nowea: 20/181 days
+[stream] pgen_nowea: 30/181 days
+[stream] pgen_nowea: 40/181 days
+[stream] pgen_nowea: 50/181 days
+[stream] pgen_nowea: 60/181 days
+[stream] pgen_nowea: 70/181 days
+[stream] pgen_nowea: 80/181 days
+[stream] pgen_nowea: 90/181 days
+[stream] pgen_nowea: 100/181 days
+[stream] pgen_nowea: 110/181 days
+[stream] pgen_nowea: 120/181 days
+[stream] pgen_nowea: 130/181 days
+[stream] pgen_nowea: 140/181 days
+[stream] pgen_nowea: 150/181 days
+[stream] pgen_nowea: 160/181 days
+[stream] pgen_nowea: 170/181 days
+[stream] pgen_nowea: 180/181 days
+model_label          feature_group  mean_abs_contribution  median_abs_contribution  mean_contribution  n_samples  share_abs_contribution
+ pgen_nowea Residual load forecast               0.400366                 0.317728          -0.075172      17376                0.453616
+ pgen_nowea             Price lags               0.247354                 0.137494           0.103737      17376                0.280252
+ pgen_nowea     Renewable forecast               0.190580                 0.126800           0.011412      17376                0.215928
+ pgen_nowea          Load forecast               0.043239                 0.016965          -0.001641      17376                0.048990
+ pgen_nowea               Calendar               0.001071                 0.000000          -0.000014      17376                0.001213

@@ -1,0 +1,27 @@
+[stream] price_1000: 181 days x 96 MTUs, 2649 features
+[stream] price_1000: 10/181 days
+[stream] price_1000: 20/181 days
+[stream] price_1000: 30/181 days
+[stream] price_1000: 40/181 days
+[stream] price_1000: 50/181 days
+[stream] price_1000: 60/181 days
+[stream] price_1000: 70/181 days
+[stream] price_1000: 80/181 days
+[stream] price_1000: 90/181 days
+[stream] price_1000: 100/181 days
+[stream] price_1000: 110/181 days
+[stream] price_1000: 120/181 days
+[stream] price_1000: 130/181 days
+[stream] price_1000: 140/181 days
+[stream] price_1000: 150/181 days
+[stream] price_1000: 160/181 days
+[stream] price_1000: 170/181 days
+[stream] price_1000: 180/181 days
+model_label          feature_group  mean_abs_contribution  median_abs_contribution  mean_contribution  n_samples  share_abs_contribution
+ price_1000 Residual load forecast               0.313635                 0.255371          -0.058775      17376                0.344052
+ price_1000             Price lags               0.197148                 0.079188           0.079902      17376                0.216268
+ price_1000         Reserve market               0.168975                 0.100429          -0.001189      17376                0.185362
+ price_1000     Renewable forecast               0.112552                 0.058352           0.003142      17376                0.123467
+ price_1000            Raw weather               0.093995                 0.067657           0.011671      17376                0.103110
+ price_1000          Load forecast               0.024865                 0.008746          -0.001667      17376                0.027277
+ price_1000               Calendar               0.000423                 0.000000           0.000008      17376                0.000464

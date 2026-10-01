@@ -1,0 +1,10 @@
+baseline,challenger,p_value,norm
+direct_1030_lgbm,direct_1030_lgbm,,1
+direct_1030_lgbm,entsoe,1.0,1
+direct_1030_lgbm,residual_1130_lgbm,0.0002415977457550511,1
+entsoe,direct_1030_lgbm,4.433673861492515e-06,1
+entsoe,entsoe,,1
+entsoe,residual_1130_lgbm,0.0,1
+residual_1130_lgbm,direct_1030_lgbm,1.0,1
+residual_1130_lgbm,entsoe,1.0,1
+residual_1130_lgbm,residual_1130_lgbm,,1

@@ -1,0 +1,18 @@
+kind: mastr_capacity
+config:
+  mastr_dir: data/mastr/Gesamtdatenexport_20260506_26.1
+  output_file: data/raw/renewable_capacity/installed_capacity.csv
+
+  # MaStR uses catalogue code 84 for Germany and 35 for "in operation".
+  country_code: "84"
+  active_status_code: "35"
+  active_only: true
+
+  # Keep this empty for a current installed-capacity snapshot. For strict historical
+  # experiments, set e.g. 2025-11-30 to avoid using future commissioned plants.
+  max_commissioning_date:
+
+  # MaStR Bruttoleistung/Nettonennleistung values are exported in kW.
+  capacity_source: net
+  capacity_unit: kW
+  include_wind_turbine_metadata: true

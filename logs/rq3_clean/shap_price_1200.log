@@ -1,0 +1,28 @@
+[stream] price_1200: 181 days x 96 MTUs, 3513 features
+[stream] price_1200: 10/181 days
+[stream] price_1200: 20/181 days
+[stream] price_1200: 30/181 days
+[stream] price_1200: 40/181 days
+[stream] price_1200: 50/181 days
+[stream] price_1200: 60/181 days
+[stream] price_1200: 70/181 days
+[stream] price_1200: 80/181 days
+[stream] price_1200: 90/181 days
+[stream] price_1200: 100/181 days
+[stream] price_1200: 110/181 days
+[stream] price_1200: 120/181 days
+[stream] price_1200: 130/181 days
+[stream] price_1200: 140/181 days
+[stream] price_1200: 150/181 days
+[stream] price_1200: 160/181 days
+[stream] price_1200: 170/181 days
+[stream] price_1200: 180/181 days
+model_label          feature_group  mean_abs_contribution  median_abs_contribution  mean_contribution  n_samples  share_abs_contribution
+ price_1200            EXAA prices               0.610395                 0.577701           0.057659      17376                0.668818
+ price_1200 Residual load forecast               0.084948                 0.055197          -0.016240      17376                0.093079
+ price_1200             Price lags               0.068107                 0.026461           0.025948      17376                0.074626
+ price_1200         Reserve market               0.051861                 0.035872          -0.005973      17376                0.056825
+ price_1200            Raw weather               0.043113                 0.027912           0.008767      17376                0.047239
+ price_1200     Renewable forecast               0.042415                 0.021508           0.000914      17376                0.046475
+ price_1200          Load forecast               0.011439                 0.003608          -0.000890      17376                0.012534
+ price_1200               Calendar               0.000369                 0.000000           0.000014      17376                0.000404

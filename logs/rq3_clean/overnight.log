@@ -1,0 +1,32 @@
+[28.09 19:42] waiting for the 5 solar fix runs
+[28.09 19:42] solar runs finished
+solar_0700: RMSE    2237 MW, max June baseline diff vs August (excl. 12 June)      0.00 MW -> OK
+solar_0800: RMSE    2242 MW, max June baseline diff vs August (excl. 12 June)      0.00 MW -> OK
+solar_0900: RMSE    2237 MW, max June baseline diff vs August (excl. 12 June)      0.00 MW -> OK
+solar_1000: RMSE    2238 MW, max June baseline diff vs August (excl. 12 June)      0.00 MW -> OK
+solar_1100: RMSE    2236 MW, max June baseline diff vs August (excl. 12 June)      0.00 MW -> OK
+CHECK PASSED
+[28.09 19:42] starting RQ3 price stage
+[19:42:07] START price_0700
+[19:42:07] START price_1100_noreserve
+[19:42:07] START price_1000
+[21:53:03] OK    price_0700
+[21:53:03] START price_0800
+[21:53:12] OK    price_1100_noreserve
+[21:53:12] START price_1200
+[23:02:04] OK    price_1000
+[23:02:04] START price_1000_noreserve
+[23:45:37] OK    price_0800
+[23:45:37] START price_0900
+[00:51:19] OK    price_1000_noreserve
+[00:51:19] START price_1100
+[01:50:20] OK    price_0900
+[01:50:20] START price_0900_noreserve
+[01:51:49] OK    price_1200
+[01:51:49] START price_1200_noreserve
+[03:40:23] OK    price_0900_noreserve
+[03:49:54] OK    price_1200_noreserve
+[04:26:12] OK    price_1100
+[04:26:12] prices finished
+[29.09 04:26] starting RQ3 SHAP
+[29.09 07:36] all done

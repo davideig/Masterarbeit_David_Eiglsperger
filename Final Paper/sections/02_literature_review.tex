@@ -1,0 +1,281 @@
+\section{Literature Review}
+\label{sec:literature}
+
+This review does not attempt a comprehensive survey of electricity price
+forecasting, for which recent reviews are available
+\cite{lago2021forecasting,weron2014electricity}. It focuses instead on the
+question that motivates this thesis: how do existing day-ahead price models
+represent their inputs, and is that representation admissible in an
+operational, pre-gate-closure setting? Table~\ref{tab:selected_literature} is
+the central output of the review. Adapting the feature overview of
+\textcite{eiser2026operational}, it records for each study which input features
+enter the price model, whether direct weather is used, whether all inputs are
+observable before gate closure, and whether the study is open and reproducible,
+and contrasts these with this thesis.
+
+\noindent\textbf{Day-Ahead Price Forecasting.}
+\textcite{weron2014electricity} provides a broad review of electricity price
+forecasting and emphasizes the volatility, seasonality, and short-run
+dependence of spot prices. \textcite{lago2021forecasting} extend this view by
+reviewing modern algorithms, proposing an open benchmark for day-ahead
+electricity price forecasting, and showing that strong empirical designs
+usually combine price lags, calendar variables, and exogenous system
+information.
+\textcite{kath2018quarterHourly} study quarter-hourly electricity price
+forecasts and show that more accurate forecasts at this resolution can create
+economic value. The quarter-hourly resolution of the \mbox{DE-LU} price target
+follows from the market design rather than from a modeling choice. Together,
+these contributions motivate the use of lagged prices, calendar variables, and
+simple naive price benchmarks in this thesis.
+
+\noindent\textbf{Load and Renewable Generation in Price Models.}
+Load, solar, and wind generation are fundamental drivers of the
+price, because they describe the physical supply-and-demand state of the power
+system \cite{do2021residualDemand,sensfuss2008meritOrder}.
+\textcite{sensfuss2008meritOrder} document the merit-order effect for Germany
+and show how renewable feed-in can reduce spot prices by shifting more
+expensive conventional generation out of the market. \textcite{pape2016fundamentals}
+use a fundamental supply-and-demand model of the German day-ahead and intraday
+market to examine how far load, renewable generation, and the conventional
+supply stack explain observed price variations, while \textcite{trebbien2023merit} use
+explainable machine learning to show that German electricity prices depend on
+interacting drivers beyond a simple merit-order view. Most directly,
+\textcite{maciejowska2021enhancing} study the role of load, wind, and solar
+generation information in day-ahead electricity price forecasting and show that
+including these forecast variables, and improving their accuracy, yields more
+accurate price forecasts. Their comparison is between price models with and
+without these forecasts, rather than against a model that already uses direct
+weather variables. Whether self-generated load, solar, and wind forecasts still
+improve a price model that already includes raw weather therefore remains open and is tested in \hyperlink{rq:price_impact_generated_forecasts}{RQ2}.
+
+A separate line of research brings weather variables directly into the
+price model. \textcite{ludwig2015bigdata} forecast German spot prices using
+historical prices and a large set of weather variables, while
+\textcite{sgarlato2023weatherPredictions} show that meteorological forecasts
+can improve German electricity price forecasts beyond the day-ahead horizon.
+These papers show that direct weather-to-price representations are feasible.
+They also make the representation question explicit: weather can enter a price
+model directly, or it can enter indirectly through load, solar, and wind
+forecasts. Using forecasts as this indirect representation raises two questions
+that this thesis addresses. First, the forecasts must be accurate, and
+\hyperlink{rq:component_forecast_quality}{RQ1} benchmarks the OBTF
+load, solar, and wind forecasts against the \mbox{ENTSO-E} forecasts. Second,
+they must capture enough of the weather-driven state to stand in for raw
+weather, which \hyperlink{rq:price_impact_generated_forecasts}{RQ2} examines.
+
+\noindent\textbf{Forecasting Load, Solar, and Wind Generation.}
+Generating these forecasts is itself a forecasting task with an established
+literature for each target. For load,
+\textcite{hong2016probabilisticLoad} show why calendar effects, recent load
+observations, and weather variables are central predictors. For photovoltaic
+generation, \textcite{antonanzas2016pvForecasting} identify radiation, cloud
+cover, temperature, and plant characteristics as key inputs, while
+\textcite{foley2012windForecasting} review wind power forecasting methods and
+emphasize the role of wind speed, wind direction, atmospheric conditions, and
+turbine locations.
+
+\noindent\textbf{Public Forecasts and Operational Timing.}
+Many \mbox{DE-LU} price forecasting models rely on system forecasts published on the
+\mbox{ENTSO-E} Transparency Platform. In their review,
+\textcite{eiser2026operational} find that these models commonly use the
+day-ahead load forecast and, in several cases, the day-ahead solar and wind
+forecasts, while direct weather variables are not listed as a separate input
+category. Table~\ref{tab:selected_literature} compares the day-ahead price-forecasting
+studies most directly related to this thesis. It places these models, which use the published
+\mbox{ENTSO-E} load and renewable-generation forecasts as price-model inputs,
+next to the weather-direct studies and the operational
+pipeline of \textcite{eiser2026operational}, and records their input features,
+use of direct weather, pre-gate-closure admissibility, and openness. For price modeling, these published load and renewable-generation forecasts act
+as summary variables that compress weather, calendar, and system information into
+expected load, solar, and wind generation, so a model that uses them
+and omits
+direct weather treats them as the relevant compression of weather information.
+
+In hindsight, every published forecast is available in the data, including
+forecasts that were not yet observable when the price forecast would have been
+made. A valid backtest must therefore apply the same restriction as an
+operational forecast, namely that every input is observable before the 12:00
+gate closure \cite{epexSpotPowerMarket}. Under the transparency regulation the public load
+forecast is published no later than two hours before gate closure and is
+observed around 10:30, so it is admissible before gate closure
+\cite{euRegulation543_2013,entsoeTransparency}. The forecast values are published, but the models that produce them are not
+disclosed. Their errors can be measured against the realized values, but an error level
+alone does not show how good a forecast is compared with alternatives. \hyperlink{rq:component_forecast_quality}{RQ1} therefore benchmarks
+these forecasts against forecasts built from open data. The day-ahead price model of
+\textcite{uniejewski2025smoothing}, for instance, relies on price lags, calendar
+variables, and this admissible load forecast, without any
+renewable-generation forecasts.
+The \mbox{ENTSO-E} solar and wind day-ahead forecasts, by contrast, are not
+publicly observable before gate closure, with a publication requirement no later
+than 18:00 on day \(d-1\)
+\cite{kleinebrahm2026energyarena,euRegulation543_2013}, so this thesis uses them
+only as benchmarks. Faced with this constraint,
+\textcite{eiser2026operational} substitute spatially resolved weather for the
+unavailable renewable-generation forecasts rather than forecasting renewable generation
+explicitly, and the Energy-Arena benchmark \cite{kleinebrahm2026energyarena}
+enforces the same pre-gate-closure timing across contributors. The reviewed
+studies do not systematically examine the trade-off between forecasting earlier
+and using later-arriving information before gate closure.
+This thesis addresses both gaps. In
+\hyperlink{rq:component_forecast_quality}{RQ1} it generates its own OBTF load, solar, and wind forecasts from information available before gate closure and benchmarks
+them against the corresponding \mbox{ENTSO-E} forecasts. In
+\hyperlink{rq:cutoff_sensitivity}{RQ3} it then examines how price forecast
+accuracy changes as the forecast creation time moves toward gate closure.
+
+\noindent\textbf{Weather and Spatial Information.}
+Weather forecasts are the main input for load, solar, and wind forecasts
+\cite{hong2016probabilisticLoad,antonanzas2016pvForecasting,foley2012windForecasting}.
+The Icosahedral Nonhydrostatic (ICON) model framework is described by
+\textcite{zaengl2015icon}, and the Deutscher Wetterdienst (DWD) provides operational weather
+forecast products as open data \cite{dwdIconForecastData}. Open-Meteo is used as an
+additional open weather application programming interface (API) in the pipeline \cite{openMeteoForecastApi}. The
+weather fields have to be weighted by where demand and generation are located.
+Population data from Eurostat therefore weight the weather for the OBTF load model,
+and installed renewable capacity from the Marktstammdatenregister (MaStR) weights it for
+the OBTF solar and wind models \cite{eurostatGisco2021,bundesnetzagenturMastr}.
+
+\begin{table}[htbp]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \caption[Input-feature representation, admissibility, and openness across studies.]
+  {Input features, pre-gate-closure admissibility, and openness of selected German and
+  \mbox{DE-LU} day-ahead price-forecasting studies compared with this thesis. A check mark denotes a
+  reported property, a dash an absent or unreported one. The \emph{ENTSO-E} and
+  \emph{Self-generated} columns mark the use of published \mbox{ENTSO-E} forecasts or of
+  forecasts produced from admissible data. \emph{Pre-GC}: all inputs observable before the 12:00
+  gate closure. \emph{Data}, \emph{Code}: released dataset or pipeline and public code.
+  \emph{Benchmark}: results reported on Energy-Arena. RES: renewable energy sources.
+  EUA: EU emission allowances.
+  \textsuperscript{a}States a 12:00 cutoff but uses the post-closure \mbox{ENTSO-E} RES forecast.
+  \textsuperscript{b}Bias-corrects the published \mbox{ENTSO-E} forecasts.
+  \textsuperscript{c}Correction of the published \mbox{ENTSO-E} load forecast.}
+  \label{tab:selected_literature}
+  \begin{tabular}{@{}l *{12}{c}@{}}
+    \toprule
+    & \multicolumn{4}{c}{General inputs} & \multicolumn{4}{c}{Load / RES forecast}
+    & \multicolumn{4}{c}{Operational \& openness} \\
+    \cmidrule(lr){2-5}\cmidrule(lr){6-9}\cmidrule(l){10-13}
+    Study
+    & \rotatebox{90}{Price lags}
+    & \rotatebox{90}{Direct weather}
+    & \rotatebox{90}{Fuel/EUA}
+    & \rotatebox{90}{Calendar}
+    & \rotatebox{90}{ENTSO-E load}
+    & \rotatebox{90}{ENTSO-E RES}
+    & \rotatebox{90}{\makecell[l]{Self-generated\\load}}
+    & \rotatebox{90}{\makecell[l]{Self-generated\\RES}}
+    & \rotatebox{90}{Pre-GC}
+    & \rotatebox{90}{Data}
+    & \rotatebox{90}{Code}
+    & \rotatebox{90}{\makecell[l]{Benchmark\\(Energy-Arena.org)}} \\
+    \midrule
+    \textcite{trebbien2023probabilistic}
+      & \checkmark & -- & \checkmark & --
+      & \checkmark & \checkmark & -- & --
+      & --\textsuperscript{a} & -- & -- & -- \\
+    \textcite{marcjasz2023distributional}
+      & \checkmark & -- & \checkmark & \checkmark
+      & \checkmark & \checkmark & -- & --
+      & -- & \checkmark & \checkmark & -- \\
+    \textcite{hilger2024multivariate}
+      & \checkmark & -- & -- & --
+      & \checkmark & \checkmark & -- & --
+      & -- & -- & -- & -- \\
+    \textcite{maciejowska2021enhancing}
+      & \checkmark & -- & -- & \checkmark
+      & \checkmark & \checkmark\textsuperscript{b} & -- & --
+      & -- & -- & -- & -- \\
+    \textcite{uniejewski2025smoothing}
+      & \checkmark & -- & -- & \checkmark
+      & \checkmark & -- & -- & --
+      & \checkmark & -- & -- & -- \\
+    \textcite{ludwig2015bigdata}
+      & \checkmark & \checkmark & -- & --
+      & -- & -- & -- & --
+      & \checkmark & -- & -- & -- \\
+    \textcite{sgarlato2023weatherPredictions}
+      & \checkmark & \checkmark & -- & --
+      & -- & -- & -- & --
+      & \checkmark & -- & -- & -- \\
+    \textcite{eiser2026operational}
+      & \checkmark & \checkmark & -- & \checkmark
+      & \checkmark & -- & -- & --
+      & \checkmark & \checkmark & \checkmark & \checkmark \\
+    \textbf{This thesis}
+      & \checkmark & \checkmark & -- & \checkmark
+      & -- & -- & \checkmark\textsuperscript{c} & \checkmark
+      & \checkmark & \checkmark & \checkmark & \checkmark \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\noindent\textbf{Operational Benchmarking.}
+The operational requirements emphasized in this review are brought together in
+the Energy-Arena operational forecasting benchmark
+\cite{kleinebrahm2026energyarena}. Energy-Arena hosts day-ahead forecasting
+challenges for the \mbox{DE-LU} and Austrian markets, with separate load, solar, wind, and price challenges as well as challenges
+tied to different forecast creation times. It scores each submission against
+those of the other contributors on the realized market outcome under a common
+gate-closure deadline, so that all participants face the same operational
+information constraint and their forecasts can be compared directly on a public
+leaderboard. It thereby turns the pre-gate-closure
+setting studied here into an external, leakage-controlled testbed. This thesis
+submits its OBTF load, solar, and wind forecasts and its resulting
+price forecasts to the benchmark at different cutoff times, where
+they remain publicly accessible and
+reproducible and can be reused by others, for example as members of forecast
+ensembles. Energy-Arena is thus where the elements reviewed above come together
+in practice: transparent open-data inputs, forecasts produced under an
+admissible information set, a fixed pre-gate-closure timing, and open, reusable
+outputs.
+
+\noindent\textbf{Summary and Positioning.}
+That load, solar and wind generation, weather, calendar variables, and
+price lags matter for day-ahead price forecasting is well established. Three less
+obvious points motivate this thesis. First, the representation of load and
+renewable generation matters, not only their inclusion. \textcite{maciejowska2021enhancing}
+show that how load and renewable generation are predicted, and how accurate those
+predictions are, changes the price forecast. Second, how weather should be represented for a price model is not
+systematically studied. Weather usually enters only indirectly, through
+published load and renewable-generation forecasts, so the model inherits
+whatever those forecasts capture, and the studies that do use weather directly
+neither compare it against that indirect representation nor test whether the
+load and renewable-generation forecasts add value on top of direct weather. This thesis
+takes up that representation question, comparing a weather-based price model
+with one that adds the OBTF load, solar, and wind forecasts and testing, through the
+weather-free variant, whether those forecasts can substitute for raw weather
+(\hyperlink{rq:price_impact_generated_forecasts}{RQ2}).
+
+Third, and most importantly, the operational information set is often left
+underspecified. A cutoff time alone does not define the experimental setup. What
+matters is which inputs are actually observable at that time, yet the reviewed
+studies often do not establish which inputs are admissible by then. Some
+therefore include inputs that are published only after
+gate closure, such as the \mbox{ENTSO-E} renewable-generation forecasts
+\cite{trebbien2023probabilistic,marcjasz2023distributional,hilger2024multivariate},
+while informative and clearly admissible signals, such as early exchange prices
+\cite{ziel2015exaa}, are left out without comment. The first opens the setup to information leakage,
+the second discards admissible information, and both follow from not
+establishing which inputs are admissible. This
+thesis instead defines the admissible information set explicitly and tracks how
+it grows through the morning up to gate closure, so that every comparison uses
+only information that was genuinely available at the forecast creation time.
+
+None of the reviewed operational \mbox{DE-LU} studies generates dedicated load,
+solar, and wind forecasts from admissible information and uses them as
+price-model inputs, and none systematically examines how price forecast quality
+changes with the forecast creation time before gate closure. This thesis
+addresses both gaps, and does so transparently: it uses open data,
+releases its full pipeline as open source, and submits its forecasts to the
+Energy-Arena. These properties are contrasted across
+the reviewed studies in Table~\ref{tab:selected_literature}.
+
+This gap leads directly to the methodology. The thesis generates OBTF load, solar, and wind forecasts from
+admissible information, compares them with the corresponding \mbox{ENTSO-E}
+day-ahead forecasts, and tests whether they add value to the day-ahead price
+model. Finally, it evaluates how price forecast performance
+changes as the forecast creation time moves from 07:00 toward 12:00.

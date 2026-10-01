@@ -1,0 +1,63 @@
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}
+                >{\raggedright\arraybackslash}p{0.62\textwidth}@{}}
+  \toprule
+  Symbol & Meaning \\
+  \midrule
+  \(d\), \(d-1\)
+  & Delivery day and previous calendar day. \\
+  \addlinespace
+  \(q\), \(\mathcal{Q}_d\)
+  & Market time unit and set of market time units on delivery day \(d\). \\
+  \addlinespace
+  \(t\)
+  & Forecast creation time or cutoff. \\
+  \addlinespace
+  \(x_{d,q}\), \(\hat{x}_{d,q|d-1}\)
+  & Realized value of a variable \(x\) in market time unit \(q\) of delivery day
+    \(d\), and its forecast created on day \(d-1\). \\
+  \addlinespace
+  \(\mathcal{F}_{d-1}^{t}\)
+  & Information available at cutoff \(t\) on day \(d-1\). \\
+  \addlinespace
+  \(P_{d,q}\), \(\hat{P}_{d,q|d-1}\)
+  & Realized \mbox{DE-LU} day-ahead price and corresponding point forecast. \\
+  \addlinespace
+  \(L_{d,q}\), \(S_{d,q}\), \(W_{d,q}\)
+  & Realized load, solar, and wind generation. \\
+  \addlinespace
+  \(G^{\mathrm{ren}}_{d,q}\)
+  & Realized renewable generation (solar plus wind). \\
+  \addlinespace
+  \(L^{\mathrm{ENTSOE}}_{d,q|d-1}\),
+  \(S^{\mathrm{ENTSOE}}_{d,q|d-1}\),
+  \(W^{\mathrm{ENTSOE}}_{d,q|d-1}\)
+  & \mbox{ENTSO-E} day-ahead load, solar, and wind forecasts. \\
+  \addlinespace
+  \(\hat{L}_{d,q|d-1}\), \(\hat{S}_{d,q|d-1}\),
+  \(\hat{W}_{d,q|d-1}\)
+  & OBTF load, solar, and wind forecasts. \\
+  \addlinespace
+  \(\hat{G}^{\mathrm{ren}}_{d,q|d-1}\)
+  & OBTF renewable-generation forecast (solar plus wind). \\
+  \addlinespace
+  \(\widehat{RL}_{d,q|d-1}\)
+  & OBTF residual-load forecast. \\
+  \addlinespace
+  \(\hat{P}^{\mathrm{base}}_{d,q|d-1}\)
+  & Base price forecast with the \mbox{ENTSO-E} load forecast. \\
+  \addlinespace
+  \(\hat{P}^{\mathrm{gen}}_{d,q|d-1}\)
+  & Price forecast with \(\hat{L}_{d,q|d-1}\),
+    \(\hat{G}^{\mathrm{ren}}_{d,q|d-1}\), and
+    \(\widehat{RL}_{d,q|d-1}\) instead of the \mbox{ENTSO-E} load forecast. \\
+  \addlinespace
+  \(\hat{P}^{\mathrm{gen},-\mathrm{wea}}_{d,q|d-1}\)
+  & Price forecast \(\hat{P}^{\mathrm{gen}}_{d,q|d-1}\) without raw weather features. \\
+  \addlinespace
+  \(\mathrm{N}_{d-1}\), \(\mathrm{N}_{d-7}\)
+  & Previous-day and previous-week naive price forecasts. \\
+  \bottomrule
+\end{tabular}
+\end{center}

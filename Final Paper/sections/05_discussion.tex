@@ -1,0 +1,290 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Do OBTF Load and Renewable Forecasts Improve Price Forecasts?}
+\label{sec:discussion_rq2}
+
+The OBTF forecasts improve the price forecast. Replacing the
+published \mbox{ENTSO-E} load forecast with the OBTF load, combined
+renewable-generation, and residual-load forecasts lowers the day-ahead price
+RMSE by 11.2\% relative to the base price forecast, and the improvement is
+statistically significant. Both forecasts use the same estimator, the same
+forecast creation time, and the same price-lag, calendar, and raw-weather
+inputs. They do not, however, share the same information set. The OBTF models
+draw on a much richer weather representation, installed capacity from the
+MaStR, population weights, and realized load, which the base
+model does not receive directly, because hundreds of such features could not be
+estimated from 70 daily training observations. The gain therefore measures the
+value of this information delivered in the compact form of explicit forecasts,
+not the value of the forecast representation alone
+(Section~\ref{sec:limitations}).
+The OBTF load and renewable-generation forecasts thus carry
+predictive information that the price model does not recover on its own from
+price history, raw weather, and the public load forecast.
+This agrees with \textcite{maciejowska2021enhancing}, who show that including
+load, wind, and solar forecasts, and improving their accuracy, yields more
+accurate day-ahead price forecasts. Their comparison is against price models
+without these forecasts, whereas the base forecast here already contains raw
+weather, so the result extends their finding to a price model that already has
+access to the underlying weather information.
+
+The weather-free variant refines this interpretation. A price model that keeps
+the OBTF forecasts but drops the raw weather features is statistically
+indistinguishable from the model that retains both, and it still improves on the
+base forecast by essentially the same margin. Once the OBTF forecasts
+are included, the two-cluster raw weather features thus add no detectable
+accuracy. This is consistent with how the forecasts are constructed, because
+each is produced by a task-specific model that already distills the relevant
+weather signal into an expected load, solar, or wind quantity. For the
+data-limited price model, these few summary variables appear to be a more usable
+form of the weather information than the raw weather from which they are
+derived, although a non-significant difference does not prove that the raw
+weather is redundant.
+
+The most operationally relevant finding emerges when this result is read together
+with RQ1. The OBTF solar and wind forecasts are less accurate than the
+corresponding \mbox{ENTSO-E} benchmarks, yet they still improve the price
+forecast, whereas the more accurate \mbox{ENTSO-E} renewable-generation forecasts,
+which several price studies use as direct inputs
+\cite{trebbien2023probabilistic,marcjasz2023distributional,hilger2024multivariate},
+cannot be used at all because they are published only after gate closure. For
+an operational price forecast, accuracy and admissibility are therefore both
+required. A more accurate benchmark that is not observable before the deadline
+cannot serve as an input, and an admissible forecast is useful only if it adds
+information beyond price history, weather, and the public load forecast. The
+OBTF forecasts satisfy both conditions, and the OBTF load forecast additionally exceeds the accuracy of the public forecast it is compared to.
+
+\subsection{Operational Value of Waiting}
+
+RQ3 shows that the accuracy of the operational price forecast improves as the
+morning progresses and the admissible information set grows, but gradually and,
+before 12:00, without statistically significant steps. Between 07:00 and 09:00
+the forecast barely changes. From 10:00, when the aFRR results become available, and 11:00, when the public load
+forecast and the mFRR results enter, the error
+declines more clearly and is 5.6\% lower at 11:00 than at 07:00. On the
+six-month test period, however, these gains are not statistically significant,
+which may partly reflect that the backtest uses the same weather run at all
+cutoffs (Section~\ref{sec:limitations}). A
+participant who must commit early therefore loses little by forecasting at 07:00
+rather than waiting until 11:00, although the direction of the evidence favors
+waiting.
+
+A further and larger gain comes at the gate-closure cutoff, once the EXAA price
+is admissible. The EXAA auction clears earlier than the SDAC auction and its
+price is a direct market estimate of the same day-ahead quantity, so it is
+unsurprising that it carries more short-horizon information than any fundamental
+input, consistent with the predictive value of the EXAA auction documented by
+\textcite{ziel2015exaa}. That a compact model using the EXAA price alone matches
+the full specification is a known property of this market rather than a finding
+of this thesis \cite{eiser2026operational}, and the feature-importance analysis
+reflects it, with the EXAA price accounting for about two-thirds of the
+contribution mass at 12:00.
+
+This does not diminish the value of the OBTF forecasts but clarifies
+where each source matters. The EXAA price is published only shortly before gate
+closure, so throughout the earlier part of the morning, while a participant is
+still forming a bid rather than submitting it at the deadline, no market price is
+yet available. Across those cutoffs the forecast rests on price lags, weather, the OBTF load and renewable-generation forecasts, and the reserve-market results,
+which lower the error at every cutoff before 12:00, although not by a robustly
+significant margin. Once the EXAA price arrives, it dominates.
+
+\subsection{Role of Weather and Public Inputs}
+
+The literature review left open how weather is best represented in a day-ahead
+price model. The weather-free variant and the feature-importance results help
+answer this question. In the base model,
+raw weather is one of the two largest groups of inputs, so the fitted model
+relies heavily on weather. When the OBTF
+forecasts are added, the importance of raw weather drops sharply and is taken over by the OBTF residual-load and renewable-generation forecasts, and the
+weather-free variant shows that the raw weather features can be removed
+altogether without a measurable loss. For this data-limited price model, the
+OBTF forecasts are therefore at least as useful a representation of
+the weather-driven system state as the two-cluster raw weather fields, plausibly
+because they condense a much richer weather signal into a small number of
+variables that are already aligned with how weather affects prices. The dominance of the OBTF residual-load forecast is consistent with residual demand as a
+central driver of the price \cite{do2021residualDemand,pape2016fundamentals} and
+with the explainable machine-learning analysis of \textcite{trebbien2023merit},
+who find load, wind, and solar generation to be the most important features for
+German day-ahead prices. This
+contrasts with operational pipelines that instead feed spatially resolved
+weather directly into the price model in place of the unavailable renewable-generation forecasts \cite{eiser2026operational}, and with studies that select among a large
+set of weather variables within the price model \cite{ludwig2015bigdata}. Meteorological
+forecasts have been shown to improve German price forecasts beyond the day-ahead
+horizon \cite{sgarlato2023weatherPredictions}. At the day-ahead horizon, the
+results here suggest that explicitly
+forecasting load and renewable generation is a promising way to bring weather
+information into a day-ahead price model, subject to the caveat on the unequal
+weather information discussed in the limitations.
+
+The public data sources play distinct and complementary roles. The published
+\mbox{ENTSO-E} load forecast is a useful baseline whose accuracy the
+OBTF load model improves on by correcting it with later information, so
+in this setting the public forecast is more useful as a starting point for
+correction than as a final input. The reserve-market results add some information about system tightness
+before any market price is available, although their effect is not robust on
+this test period. The EXAA price is the single most informative
+public input at gate closure, but it is admissible only at the very end of the
+morning. Read together, these inputs form a sequence in which fundamental and
+reserve information dominate early and the exchange price dominates late, and an
+operational price model benefits from using each of them at the point in the
+morning where it becomes available.
+
+\subsection{Openness and Operational Deployment}
+
+A defining property of the pipeline is that it is fully open and operationally
+admissible. Every input is drawn from open, automatically retrievable sources,
+namely open weather forecasts, the \mbox{ENTSO-E} Transparency Platform, the
+MaStR, and gridded population data, so the self-generated load,
+solar, wind, and price forecasts can be generated and extended without
+proprietary inputs. The preprocessing, the OBTF models, and the price model
+are released as a modular, configuration-driven codebase that is ready for
+operational use and deployment, so each stage can be reused and extended.
+Together with the daily Energy-Arena submission, this follows the call of
+\textcite{lago2021forecasting} for open-access benchmarks in electricity price
+forecasting. By replacing the
+post-gate-closure \mbox{ENTSO-E} renewable-generation forecasts with
+OBTF forecasts, the pipeline also respects the operational timing,
+so the reported accuracy reflects what a participant could actually have
+produced before the deadline.
+
+The pipeline is additionally submitted to Energy-Arena \cite{kleinebrahm2026energyarena}, where its load, solar, wind,\footnote{The Energy-Arena
+\mbox{DE-LU} wind challenge targets onshore wind generation, so only the onshore
+component of the OBTF wind forecast is submitted there, whereas the OBTF wind forecast evaluated in this thesis is total wind generation, onshore and
+offshore.} and price forecasts are
+scored against realized outcomes under a common gate-closure deadline and shared
+in the benchmark's cooperative mode so that other forecasters can reuse them, for
+example as ensemble members. This provides a continuous, forward-looking, and
+leakage-controlled evaluation that extends the fixed test period of this thesis
+and lets the OBTF forecasts serve as a reusable building block for further
+work.
+
+Beyond serving the price model, the OBTF component forecasts are
+directly reusable. Regenerated from the open repository, the OBTF load forecast improves on the public \mbox{ENTSO-E} load forecast and can be used in its place,
+while the OBTF solar and wind forecasts provide admissible substitutes for the
+\mbox{ENTSO-E} renewable-generation forecasts, which are not published before
+gate closure. Unlike the \mbox{ENTSO-E} forecasts, which are produced by
+undisclosed models and cannot be inspected, the OBTF forecasts are
+fully transparent, because their inputs, models, and construction are open and
+can be examined and adapted rather than taken as given.
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+The load benchmarking in RQ1 is an operational rather than a like-for-like
+modeling comparison. The OBTF load forecast corrects the public
+\mbox{ENTSO-E} forecast with information available up to the pre-gate-closure
+cutoff, whereas the \mbox{ENTSO-E} forecast is produced by an undisclosed model
+at a generally earlier, unspecified cutoff. A comparison that fixes both
+forecasts to an identical cutoff is therefore not feasible, and the reported load
+improvement should be read as the operational value of correcting the public
+forecast before gate closure rather than as evidence of a superior standalone
+load model. This caveat concerns only the interpretation of the standalone load
+comparison. Because the OBTF load forecast serves solely as an admissible input to the
+price model, its only operational requirement is to be available before the 12:00
+gate closure, so producing it at a later cutoff than the \mbox{ENTSO-E} forecast,
+with correspondingly more recent information, is by design rather than a
+disadvantage.
+
+The central caveat of the RQ2 comparison, discussed in
+Section~\ref{sec:discussion_rq2}, is that the base price model and the OBTF models do
+not share the same information set. The base model receives raw weather only
+through a compact two-cluster aggregation of the \mbox{ICON-D2} fields and none
+of the capacity, population, and realized-load inputs of the OBTF models. A
+comparison that supplied the base model with all of these inputs directly would
+isolate the effect of the explicit representation, but hundreds of such features
+cannot be estimated reliably from 70 daily training observations. The OBTF forecasts avoid this by splitting the
+problem. Load, solar, and wind generation depend on different weather
+variables, such as temperature for load, irradiance and cloud cover for solar,
+and wind speed for wind. Without the first-stage forecasts, a single price model
+would have to receive all of these variables at once. With them, each OBTF model uses only the weather it needs, and the price model receives the result as
+a small number of forecast series, namely load, renewable generation, and
+residual load. This limitation is thus at the same time the central appeal of
+the approach.
+
+The evaluation covers a single test window from February to July 2026, which is
+the period for which post-transition quarter-hourly prices and the full set of
+operational inputs are available. The results therefore describe one half-year of
+a market that only recently moved to quarter-hourly clearing, and the autumn and
+mid-winter months lie outside the test window. Whether the reported effects are
+stable across seasons and across years with different fuel-price and
+renewable-capacity conditions cannot be established from this sample, and a longer
+multi-year evaluation would be needed to settle it. The ongoing Energy-Arena submission
+extends this evidence with each new delivery day.
+
+A major limitation of RQ3 concerns the weather input. The earlier
+\mbox{ICON-D2} runs that would be admissible at the 07:00 to 09:00 cutoffs are
+not archived for the whole test period, so all cutoffs use the 06~UTC run,
+which is available only from about 09:20. The early cutoffs therefore receive a
+more recent weather forecast than they could use in operation, which favors
+them. At the same time, the backtest cannot capture any improvement from newer
+weather runs over the morning, although weather is a central input of both the
+OBTF and the price models. Both effects bias the measured gain from waiting
+downward and may explain why the gains before 12:00 are not statistically
+significant. A backtest with the operational run schedule of
+Table~\ref{tab:cutoff_accrual}, possible once the earlier runs have been archived
+over a full test period, would resolve this.
+
+The OBTF solar and wind forecasts remain less accurate than the
+\mbox{ENTSO-E} benchmarks, and the feature-importance analysis attributes more of
+the price model's contribution to the OBTF load and residual-load forecasts than to the OBTF renewable-generation forecast (Section~\ref{sec:results_feature_importance}). The
+OBTF solar and wind forecasts are thus admissible and useful but not competitive
+in absolute accuracy, and closing this gap is a limitation of the current OBTF models rather than a property of the price model. The capacity data from the
+current MaStR also include late-registered units that were not
+yet known at the time, an effect the rolling bias correction partly absorbs. In
+addition, the archived \mbox{ICON-D2} irradiance is incomplete or implausible on a
+few days in June 2026. These days are retained, so the affected solar forecasts,
+and through them the price forecasts, carry these input errors. As with the OBTF load forecast, however, the comparison is not on equal footing. The \mbox{ENTSO-E}
+solar and wind benchmarks are produced by undisclosed models and, being published
+only after gate closure, may draw on later weather runs and more recent
+information than the OBTF forecasts, which are restricted to the
+pre-gate-closure cutoff. Part of the observed gap may therefore reflect this
+information and timing advantage rather than modeling skill alone, and how much of
+it is genuinely attributable to the OBTF models cannot be established from
+this comparison.
+
+The feature-importance analysis is diagnostic rather than causal. The SHAP
+contributions describe how the fitted model distributes its predictions across
+inputs on the sampled data, not the true causal effect of each input, and they
+are computed on the variance-stabilized model target so that only their direction
+and relative magnitude are interpretable.
+
+Finally, the thesis evaluates point forecasts only. Operational trading and risk
+management typically require the full predictive distribution, and the pipeline
+does not yet produce or evaluate probabilistic price forecasts.
+
+\subsection{Future Work}
+
+Several extensions follow directly from these limitations. The most immediate is
+to close the accuracy gap of the OBTF solar and wind forecasts, for
+example through multi-model weather ensembles \cite{bruninx2026windensembles}, wind speeds interpolated to the
+turbine-specific hub heights recorded in the MaStR, or an
+explicit treatment of curtailment, since more accurate renewable-generation forecasts would
+strengthen the fundamental contribution to the price model.
+
+The estimators themselves could also be revisited. Tabular
+foundation models such as TabPFN are designed for small training sets
+\cite{hollmann2025tabpfn}, which makes them a natural candidate for the
+data-limited price model with its 70-day training window.
+
+Beyond point forecasts, the pipeline could be extended to probabilistic
+forecasting. The OBTF models could provide quantile forecasts of load, solar, and
+wind generation as price-model inputs, which \textcite{uniejewski2026probabilistic}
+show to lower the price RMSE by up to 13\% compared with point inputs for the
+German market. The same OBTF forecasts and cutoff structure could feed a
+distributional or quantile price model \cite{marcjasz2023distributional}, which would make the operational value of
+the approach measurable in terms of the full predictive distribution rather than
+the conditional mean alone.
+
+Further gains may come from a broader admissible information set. Cross-border
+prices and residual-load forecasts of neighboring bidding zones, as well as fuel
+and emission-allowance prices, are known to carry predictive information for
+German day-ahead prices
+\cite{trebbien2023probabilistic,hilger2024multivariate,pape2016fundamentals},
+and incorporating them within the open-data and
+pre-gate-closure constraints of this thesis would show how much further the
+operational forecast can be improved.
+
+Finally, a longer and multi-seasonal evaluation would establish the stability of
+the reported effects across market regimes, and extending the setup to the
+intraday markets that follow the day-ahead auction would broaden its operational
+relevance.

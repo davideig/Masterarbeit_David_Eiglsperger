@@ -1,0 +1,104 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{0.97\textwidth}{!}{%
+\begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    rowlabel/.style={anchor=east, align=right, font=\small},
+    event/.style={circle, fill=black, inner sep=1.6pt},
+    gen/.style={circle, draw=black, fill=white, inner sep=1.6pt},
+    note/.style={font=\footnotesize, inner sep=1.5pt, fill=white},
+    stream/.style={very thick},
+    cutoff/.style={dashed, gray}
+]
+
+% time-to-x mapping: x = t - 6, local clock time t on day d-1
+
+% ---- cutoff grid and gate closure ----
+\foreach \t in {7, 8, 9, 10, 11} {
+  \draw[cutoff] ({\t-6},0.3) -- ({\t-6},9.7);
+}
+\draw[very thick] (6.0,0.3) -- (6.0,9.7);
+\node[note, anchor=south west] at (6.12,9.6) {Day-ahead gate closure, 12:00};
+
+% ---- time axis ----
+\draw[->, thick] (-0.2,0) -- (6.85,0);
+\foreach \t/\l in {6/06:00, 7/07:00, 8/08:00, 9/09:00, 10/10:00, 11/11:00,
+                   12/12:00} {
+  \draw ({\t-6},0.08) -- ({\t-6},-0.08)
+    node[below, font=\footnotesize] {\l};
+}
+\node[font=\footnotesize] at (3.6,-1.05)
+  {local time on the day before delivery};
+
+% ---- data rows ----
+\node[rowlabel] at (-0.45,0.9) {DWD ICON-D2\\weather runs};
+\node[event] at (0.35,0.9) {};
+\node[note, anchor=south] at (0.35,1.04) {03 UTC};
+\node[event] at (3.35,0.9) {};
+\node[note, anchor=south] at (3.35,1.04) {06 UTC};
+\node[event] at (6.35,0.9) {};
+\node[note, anchor=south] at (6.35,1.04) {09 UTC};
+
+\node[rowlabel] at (-0.45,1.95) {ENTSO-E realized load};
+\draw[stream,->] (0,1.95) -- (6.0,1.95);
+\node[note, anchor=south west] at (0.05,2.05)
+  {extends with up to 1 h publication delay};
+
+\node[rowlabel] at (-0.45,3.0) {ENTSO-E realized wind\\and solar generation};
+\draw[stream,->] (0,3.0) -- (6.0,3.0);
+\node[note, anchor=south west] at (0.05,3.1)
+  {extends with up to 1 h publication delay};
+
+\node[rowlabel] at (-0.45,4.05) {ENTSO-E day-ahead\\load forecast};
+\node[event] at (4.5,4.05) {};
+\node[note, anchor=west] at (4.62,4.05) {available around 10:30};
+
+\node[rowlabel] at (-0.45,5.1) {Control-reserve\\auction results};
+\node[event] at (3.0,5.1) {};
+\node[note, anchor=south] at (3.0,5.24) {FCR};
+\node[event] at (4.0,5.1) {};
+\node[note, anchor=south] at (4.0,5.24) {aFRR};
+\node[event] at (5.0,5.1) {};
+\node[note, anchor=south] at (5.0,5.24) {mFRR};
+
+\node[rowlabel] at (-0.45,6.15) {EXAA day-ahead prices};
+\node[event] at (5.25,6.15) {};
+\node[note, anchor=east] at (5.13,6.15) {published around 11:15};
+
+\node[rowlabel] at (-0.45,7.2) {Day-ahead\\auction results};
+\node[event] at (6.35,7.2) {};
+\node[note, anchor=east] at (6.23,7.2) {released after 12:00};
+
+\node[rowlabel] at (-0.45,8.25) {ENTSO-E day-ahead wind\\and solar forecast};
+\node[event] at (6.35,8.25) {};
+\node[note, anchor=east, align=right] at (6.23,8.25)
+  {publicly available after\\12:00, by 18:00};
+
+% ---- model-run row ----
+\node[rowlabel] at (-0.45,9.3) {Forecast\\creation};
+\foreach \t in {7, 8, 9, 10, 11, 12} {
+  \node[gen] at ({\t-6},9.3) {};
+}
+
+% ---- legend ----
+\node[event] at (-1.05,-1.85) {};
+\node[note, anchor=west] at (-0.9,-1.85) {publication event or deadline};
+\draw[stream,->] (3.2,-1.85) -- (3.6,-1.85);
+\node[note, anchor=west] at (3.75,-1.85) {extending data stream};
+\node[gen] at (-1.05,-2.55) {};
+\node[note, anchor=west, align=left] at (-0.9,-2.55)
+  {forecast creation time};
+
+\end{tikzpicture}%
+}
+\caption[Operational overview of data availability and forecast creation
+times on the day before delivery.]
+{Operational overview of data availability, forecast creation times, and
+model runs on the day before delivery
+\cite{euRegulation543_2013,kleinebrahm2026energyarena,exaaTradingRules2025,dwdIconForecastData,openMeteoForecastApi}.
+The dashed grid marks the forecast creation times in local time.
+Times are shown for summer time. Events to the right of 12:00 are not drawn to
+scale.}
+\label{fig:operational_timeline}
+\end{figure}

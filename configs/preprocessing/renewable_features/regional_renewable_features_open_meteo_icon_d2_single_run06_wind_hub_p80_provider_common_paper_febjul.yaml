@@ -1,0 +1,52 @@
+kind: regional_renewable_features
+config:
+  repo_root: "."
+  weather_source: open_meteo
+  target_tz: Europe/Berlin
+
+  cluster_file: data/clustering/icon_d2_clustering_c25.parquet
+  capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  capacity_map_file: data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_wind_hub_p80_provider_common_regional_capacity_map.csv
+  capacity_weather_point_file: data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_wind_hub_p80_provider_common_weather_points.csv
+  output_file: data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_wind_hub_p80_provider_common_regional_renewable_features.csv
+
+  open_meteo_point_source: capacity
+  capacity_weather_technologies: [wind_offshore, wind_onshore]
+  capacity_weather_onshore_points_per_region: 10
+  capacity_weather_offshore_points: 30
+  capacity_weather_solar_points_per_region: 1
+  capacity_weather_random_state: 42
+
+  open_meteo_weather_file: data/processed/open_meteo/open_meteo_icon_d2_single_run06_wind_hub_p80_provider_common_weather.csv
+  open_meteo_base_url: https://customer-single-runs-api.open-meteo.com/v1/forecast
+  open_meteo_api_key_env: OPEN_METEO_API_KEY
+  open_meteo_api_mode: single_run
+  open_meteo_model: icon_d2
+  open_meteo_single_run_hour_utc: "06:00"
+  open_meteo_single_run_forecast_days: 2
+  open_meteo_start_date: "2026-07-01"
+  open_meteo_end_date: "2026-07-31"
+  open_meteo_batch_size: 100
+  open_meteo_cell_selection: nearest
+  open_meteo_request_pause_seconds: 0.5
+  open_meteo_retry_attempts: 8
+  open_meteo_retry_backoff_seconds: 60.0
+  open_meteo_skip_unavailable_runs: true
+  open_meteo_fallback_previous_runs: true
+  open_meteo_fallback_step_hours: 2
+  open_meteo_fallback_max_lookback_hours: 24
+  open_meteo_force_download: false
+  open_meteo_hourly_variables:
+    - wind_speed_80m
+    - wind_direction_80m
+    - wind_speed_120m
+    - wind_direction_120m
+    - wind_speed_180m
+    - wind_direction_180m
+    - temperature_2m
+    - surface_pressure
+    - boundary_layer_height
+    - cloud_cover
+
+  include_cluster_features: false
+  include_ramps: true

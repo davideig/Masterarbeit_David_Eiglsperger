@@ -1,0 +1,29 @@
+kind: evaluation
+config:
+  repo_root: .
+  target_tz: Europe/Berlin
+  test_start: '2026-02-01T00:00:00+01:00'
+  test_end: '2026-07-31T23:45:00+02:00'
+  frequency: 15min
+  n_periods: 96
+  y_true_column: y_true
+  output_dir: results/evaluation/load_direct_vs_entsoe_residual_paper_febjul_clean
+  validate_inputs: true
+  run_gw_tests: true
+  point_forecasts:
+  - name: direct_1030_lgbm
+    path: results/load_forecast_results/direct_actual_open_meteo_p10_morning0845_daily_weather_lightgbm_paper_febjul_tw224_f180_pop_weighted_quantiles_clean/forecast.csv
+    kind: point
+    value_column: Load_Model_MW
+    y_true_column: Load_Actual_MW
+  - name: entsoe
+    path: results/load_forecast_results/hybrid_entsoe_residual_open_meteo_p10_morning1015_daily_weather_lightgbm_paper_febjul_tw224_f180_pop_weighted_quantiles_clean/forecast.csv
+    kind: point
+    value_column: Load_Benchmark_MW
+    y_true_column: Load_Actual_MW
+  - name: residual_1130_lgbm
+    path: results/load_forecast_results/hybrid_entsoe_residual_open_meteo_p10_morning1015_daily_weather_lightgbm_paper_febjul_tw224_f180_pop_weighted_quantiles_clean/forecast.csv
+    kind: point
+    value_column: Load_Model_MW
+    y_true_column: Load_Actual_MW
+  quantile_forecasts: []

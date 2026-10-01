@@ -1,0 +1,30 @@
+In the European day-ahead electricity market, bids for each quarter-hour of the
+next day must be submitted before the auction closes at 12:00.
+Market participants use price forecasts to prepare these bids, so a forecast is
+only operational if all of its inputs are available at that time. Many studies use the
+load, solar, and wind forecasts published by the transmission system operators as
+price-model inputs. The operators publish
+these forecasts to meet a legal reporting obligation and do not disclose how they
+are produced. The solar and wind forecasts are, in addition, only published after
+12:00, so they could not be used in real operation.
+
+This thesis develops an open and operational pipeline that produces its own load,
+solar, and wind forecasts from open data and uses them to forecast day-ahead
+prices for the German-Luxembourg market. It asks how accurate these forecasts are
+compared with those of the system operators, whether they improve the price
+forecast, and how the accuracy of the price forecast changes with information sets that grow hourly
+from 07:00 to 12:00. Over a February to July 2026 test period, the
+proposed load forecast reduces the error of the system operators' forecast by
+36.0\%, while the proposed solar and wind forecasts are less accurate but
+available in time. Using these forecasts lowers the price forecast error by
+11.2\%. Forecasts made later in the morning become gradually more accurate, but the
+only statistically significant gain comes at 12:00, when the price of the
+Austrian day-ahead auction, which closes earlier, is already available. The results show that open
+load, solar, and wind forecasts improve operational price forecasts even where
+they are less accurate than those of the system operators. Beyond these results, the thesis provides
+a transparent alternative to the forecasts of the system operators, whose methods
+are not disclosed.
+The pipeline uses only open data and is publicly released, and its forecasts are
+submitted every day to the open Energy-Arena benchmark, where their accuracy can be
+verified independently beyond the test period. Instead of relying on black boxes, anyone can inspect, rerun, and reuse
+these benchmarked forecasts for their own purposes.

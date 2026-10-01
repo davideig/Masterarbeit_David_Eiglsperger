@@ -1,0 +1,19 @@
+kind: entsoe_renewable_forecast_benchmark
+config:
+  repo_root: "."
+  target_tz: Europe/Berlin
+  country_code_entsoe: DE_LU
+  entsoe_api_key_env: ENTSOE_API_KEY
+  entsoe_start_date: "2026-02-01"
+  entsoe_end_date: "2026-07-31"
+  process_type: A01
+  chunk_days: 30
+
+  actual_generation_file: data/processed/renewable_generation/actual_generation_2025_20260731.csv
+  forecast_file: data/processed/renewable_generation/entsoe_renewable_forecast_paper_febjul.csv
+  export_dir: results/renewable_generation_results/entsoe_renewable_forecast_benchmark_paper_febjul
+
+  installed_capacity_mw:
+    Solar: 66119.530485
+    Wind_Total: 79629.724430
+    Renewable_Total: 145749.254915

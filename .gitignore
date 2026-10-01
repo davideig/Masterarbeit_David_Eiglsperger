@@ -1,0 +1,39 @@
+# Python, environments, caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pixi/
+.venv*/
+.pytest_cache/
+.ipynb_checkpoints/
+.cache/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Input data and generated outputs not part of the hand-in
+data/raw/
+data/processed/
+data/mastr/
+output/
+
+# LaTeX build files
+Final Paper/*.aux
+Final Paper/*.bbl
+Final Paper/*.bcf
+Final Paper/*.blg
+Final Paper/*.fdb_latexmk
+Final Paper/*.fls
+Final Paper/*.lof
+Final Paper/*.log
+Final Paper/*.lot
+Final Paper/*.run.xml
+Final Paper/*.toc
+
+# OS noise
+.DS_Store
+
+# Local API caches
+data/cache/

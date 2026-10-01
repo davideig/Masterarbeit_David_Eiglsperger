@@ -1,0 +1,57 @@
+kind: renewable_generation_model
+config:
+  repo_root: "."
+  target_tz: Europe/Berlin
+  country_code_entsoe: DE_LU
+  entsoe_api_key_env: ENTSOE_API_KEY
+  entsoe_start_date: "2025-01-01"
+  entsoe_end_date: "2026-07-31"
+  include_solar_control_area_targets: true
+  actual_generation_file: data/processed/renewable_generation/actual_generation_solar_control_areas_2025_20260731.csv
+  renewable_proxy_file: data/processed/renewable_proxy/dwd_icon_mastr_solar_tso_c25_run06_solar_spread_regional_renewable_features.csv
+  extra_renewable_proxy_files:
+    - data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_mastr_solar_tso_c25_cloud_cover_features.csv
+  extra_renewable_proxy_prefixes:
+    - om_
+  unavailability_file: data/processed/renewable_generation/generation_unavailability_2025_2026.csv
+  include_dwd_cluster_features: false
+  include_unavailability: false
+  include_solar_geometry_features: true
+  include_solar_physics_features: true
+  target_feature_mode: technology_specific
+  solar_target_region_scope: own_region_plus_global
+  target_baseline_mode: solar_physics_proxy
+  solar_training_clear_sky_min: 0.02
+  solar_training_elevation_min_deg: 5.0
+  solar_twilight_clear_sky_threshold: 0.005
+  solar_suspicious_training_filter: true
+  solar_suspicious_clear_sky_min: 0.25
+  solar_suspicious_actual_to_baseline_min: 0.35
+  solar_suspicious_baseline_min_capacity_share: 0.08
+  rolling_bias_correction_window_days: 45
+  rolling_bias_correction_group: hour
+  rolling_bias_correction_min_observations: 24
+  rolling_bias_correction_shrinkage: 0.75
+  solar_total_bias_correction_window_days: 45
+  solar_total_bias_correction_group: hour
+  solar_total_bias_correction_min_observations: 24
+  solar_total_bias_correction_shrinkage: 0.75
+  target_columns:
+    - Solar_50Hertz_Actual_MW
+    - Solar_Amprion_Actual_MW
+    - Solar_TenneT_Actual_MW
+    - Solar_TransnetBW_Actual_MW
+  model_type: hist_gradient_boosting
+  train_days_rolling: 90
+  min_train_days: 20
+  target_availability_lag_days: 1
+  target_availability_cutoff_hour: 10
+  target_availability_cutoff_minute: 0
+  test_start: "2025-11-23"
+  test_end: "2026-07-31"
+  hgb_max_iter: 600
+  hgb_learning_rate: 0.025
+  hgb_max_leaf_nodes: 7
+  hgb_l2_regularization: 2.0
+  random_state: 42
+  export_dir: results/renewable_generation_results/dwd_icon_mastr_solar_tso_c25_run06_tso_components_cloud_geometry_physics_residual_own_region_daylight_suspicious_totalbias_hgb_solar_bias45_hour_s075_d90_cutoff1000_price_warmup_d70_nov23febjul

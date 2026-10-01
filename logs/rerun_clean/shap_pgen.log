@@ -1,0 +1,26 @@
+[stream] pgen: 181 days x 96 MTUs, 1401 features
+[stream] pgen: 10/181 days
+[stream] pgen: 20/181 days
+[stream] pgen: 30/181 days
+[stream] pgen: 40/181 days
+[stream] pgen: 50/181 days
+[stream] pgen: 60/181 days
+[stream] pgen: 70/181 days
+[stream] pgen: 80/181 days
+[stream] pgen: 90/181 days
+[stream] pgen: 100/181 days
+[stream] pgen: 110/181 days
+[stream] pgen: 120/181 days
+[stream] pgen: 130/181 days
+[stream] pgen: 140/181 days
+[stream] pgen: 150/181 days
+[stream] pgen: 160/181 days
+[stream] pgen: 170/181 days
+[stream] pgen: 180/181 days
+model_label          feature_group  mean_abs_contribution  median_abs_contribution  mean_contribution  n_samples  share_abs_contribution
+       pgen Residual load forecast               0.383425                 0.305631      -7.640457e-02      17376                0.422990
+       pgen             Price lags               0.224628                 0.111535       9.164849e-02      17376                0.247807
+       pgen     Renewable forecast               0.138400                 0.076761       8.699637e-03      17376                0.152681
+       pgen            Raw weather               0.117929                 0.092362       2.022063e-02      17376                0.130098
+       pgen          Load forecast               0.041237                 0.014492      -2.890156e-03      17376                0.045492
+       pgen               Calendar               0.000846                 0.000000       7.565898e-07      17376                0.000933

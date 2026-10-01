@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "da-price-forecasting"
+version = "0.1.0"
+description = "Modular forecasting pipelines for German day-ahead electricity prices."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.11,<3",
+    "pyyaml>=6.0,<7",
+    "python-dotenv>=1.0,<2",
+    "requests>=2.32,<3",
+    "openpyxl>=3.1,<4",
+    "yfinance>=0.2,<0.3",
+]
+
+[project.scripts]
+da-price-forecast = "da_price_forecasting.scripts.run:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+markers = [
+    "live_api: tests that call external APIs and require credentials",
+]

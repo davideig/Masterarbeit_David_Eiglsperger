@@ -1,0 +1,38 @@
+kind: regional_renewable_features
+config:
+  repo_root: "."
+  weather_source: open_meteo
+  feature_mode: cloud_cover
+  target_tz: Europe/Berlin
+
+  cluster_file: data/clustering/icon_d2_mastr_solar_tso_c25.csv
+  capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  capacity_map_file: data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_mastr_solar_tso_c25_cloud_cover_capacity_map.csv
+  output_file: data/processed/renewable_proxy/open_meteo_icon_d2_single_run06_mastr_solar_tso_c25_cloud_cover_full_features.csv
+
+  # Reuse the existing weather cache, which already contains July, and fill the
+  # missing earlier days so the paper-window model has cloud features throughout.
+  open_meteo_weather_file: data/processed/open_meteo/open_meteo_icon_d2_single_run06_mastr_solar_tso_c25_cloud_cover_weather.csv
+  open_meteo_base_url: https://customer-single-runs-api.open-meteo.com/v1/forecast
+  open_meteo_api_key_env: OPEN_METEO_API_KEY
+  open_meteo_api_mode: single_run
+  open_meteo_model: icon_d2
+  open_meteo_single_run_hour_utc: "06:00"
+  open_meteo_single_run_forecast_days: 2
+  open_meteo_request_pause_seconds: 0.5
+  open_meteo_retry_attempts: 8
+  open_meteo_retry_backoff_seconds: 60.0
+  open_meteo_start_date: "2025-10-25"
+  open_meteo_end_date: "2026-07-31"
+  open_meteo_batch_size: 250
+  open_meteo_cell_selection: nearest
+  open_meteo_force_download: false
+  open_meteo_point_selection: centroid
+  open_meteo_hourly_variables:
+    - cloud_cover
+    - cloud_cover_low
+    - cloud_cover_mid
+    - cloud_cover_high
+
+  solar_region_strategy: state_tso_proxy
+  include_ramps: true

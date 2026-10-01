@@ -1,0 +1,22 @@
+kind: regional_renewable_features
+config:
+  repo_root: "."
+  weather_source: dwd_icon
+  target_tz: Europe/Berlin
+
+  icon_dir: data/processed/icon_aggregated_mastr_wind_c100_run06
+  capacity_file: data/raw/renewable_capacity/installed_capacity.csv
+  cluster_file: data/clustering/icon_d2_mastr_wind_c100.csv
+  capacity_map_file: data/processed/renewable_proxy/dwd_icon_mastr_wind_c100_run06_regional_capacity_map.csv
+  output_file: data/processed/renewable_proxy/dwd_icon_mastr_wind_c100_run06_regional_renewable_features.csv
+
+  start_folder_date: "2025-10-25"
+  required_run: "06"
+  dwd_folder_offset_date: "2025-10-26"
+  skip_dates:
+    - "2025-10-26"
+    - "2025-10-27"
+    - "2025-10-28"
+
+  include_cluster_features: false
+  include_ramps: true

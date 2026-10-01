@@ -1,0 +1,54 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+
+% ---- time axis of forecast creation times ----
+\draw[thick, draw=fgLine, -{Latex[length=2.2mm,width=1.7mm]}] (-5.6,0) -- (5.9,0);
+\foreach \x/\l in {-5/07:00, -3/08:00, -1/09:00, 1/10:00, 3/11:00, 5/12:00} {
+  \draw[thick, draw=fgLine] (\x,0.08) -- (\x,-0.08);
+  \node[font=\scriptsize, above] at (\x,0.1) {\l};
+  \node[circle, draw=fgLine, thick, fill=white, inner sep=1.6pt] at (\x,0) {};
+}
+\node[font=\scriptsize, anchor=west] at (-5.6,0.75)
+  {forecast creation time \(t\) on the day before delivery};
+\node[font=\scriptsize, anchor=south] at (5,0.55) {gate closure};
+
+% ---- rerun of the pipeline ----
+\node[fgproc=10.2cm] (run) at (0,-1.45)
+  {\textbf{Rerun the full pipeline at each creation time \(t\)}\\using only inputs admissible at \(t\)};
+\foreach \x in {-5,-3,-1,1,3,5}
+  \draw[fgflow] (\x,-0.12) -- (\x,0 |- run.north);
+
+% ---- forecasts ----
+\node[fgout=3.6cm] (fc) at (0,-3.2)
+  {\textbf{Price forecasts}\\\(\hat{P}^{\,t}_{d,q|d-1}\)};
+\node[fgout=2.3cm, fgvar] (exaa) at (-4.6,-3.2)
+  {\textbf{EXAA-only}\\benchmark at 12:00};
+
+% ---- evaluation ----
+\node[fgeval=4.6cm] (eval) at (0,-5.0)
+  {\textbf{Evaluation}\\RMSE, MAE, Giacomini--White tests
+   against 07:00 and against the preceding time};
+\node[fgdata=2.2cm] (real) at (4.6,-5.0)
+  {\textbf{Realized}\\\textbf{day-ahead prices}};
+
+\node[fgrq=6.4cm] (rq) at (0,-6.9)
+  {\textbf{RQ3:} How does price forecast performance change with richer
+   information sets over time?};
+
+% ---- flows ----
+\draw[fgflow] (run.south) -- (fc.north);
+\draw[fgflow] (fc.south) -- (eval.north);
+\draw[fgaux]  (exaa.south) |- (eval.west);
+\draw[fgflow] (real.west) -- (eval.east);
+\draw[fgflow] (eval.south) -- (rq.north);
+
+\end{tikzpicture}
+\caption[Information-set timing experiment for RQ3.]
+{Design of RQ3. The full pipeline is rerun at six forecast
+creation times from 07:00 to the 12:00 gate closure, each time with only the
+information admissible at that time, and the resulting price forecasts are
+compared with each other and with a compact EXAA-only benchmark. Notation as in
+Figure~\ref{fig:system_overview}.}
+\label{fig:cutoff_sensitivity_design}
+\end{figure}

@@ -1,0 +1,478 @@
+\documentclass[
+  paper=a4,
+  fontsize=10pt,
+  toc=bib,
+  titlepage=firstiscover,
+  headings=big
+]{scrartcl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TABLE OF CONTENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ENCODING & PAGE LAYOUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=4cm, inner=3cm, outer=3cm]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none,
+  natbib=true,
+  maxcitenames=2,
+  seconds=true,
+  urldate=iso,
+]{biblatex}
+
+\renewcommand{\citet}[1]{%
+  \citeauthor{#1}~(\begingroup\hypersetup{linkbordercolor={0 1 0}}\hyperlink{cite.\therefsection @#1}{\citeyear{#1}}\endgroup)%
+}
+
+\addbibresource{references.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HYPERLINKS & CROSS-REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[
+  colorlinks=false,
+  linkbordercolor={1 0 0},
+  citebordercolor={0 1 0},
+  urlbordercolor={0 0.7 1},
+  filebordercolor={0 0.5 0},
+  hyperfootnotes=false
+]{hyperref}
+% Print version (latexmk -jobname=main_print -usepretex='\def\printversion{}'): no link boxes
+\ifdefined\printversion\hypersetup{hidelinks}\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SPACING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{setspace}
+\setlength{\parskip}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MATHEMATICS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{thrm}{Theorem}
+\newtheorem{coroll}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TABLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\definecolor{picpgreen}{RGB}{200, 230, 201}
+\definecolor{picpred}{RGB}{255, 205, 210}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FIGURES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{placeins}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PLOTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,fit,backgrounds}
+
+% Shared diagram notation (flowchart / data-flow conventions), used by all
+% process diagrams: cylinder = data source or store, rectangle = process or
+% model, parallelogram = forecast (data product), rectangle with double side
+% bars = evaluation, double-bordered rectangle = external platform, dashed
+% rounded box = research question or experimental variation.
+\definecolor{fgData}{HTML}{DCE8F4}
+\definecolor{fgOut}{HTML}{E2F0DA}
+\definecolor{fgEval}{HTML}{FBEAD2}
+\definecolor{fgExt}{HTML}{E6E6E6}
+\definecolor{fgLine}{HTML}{2E2E2E}
+\tikzset{
+  fgbase/.style={execute at begin node={\setstretch{1}\hyphenpenalty=10000\exhyphenpenalty=50}},
+  fgdata/.style={fgbase, cylinder, shape border rotate=90, aspect=0.16, draw=fgLine,
+                 thick, fill=fgData, align=center, text width=#1,
+                 inner sep=3pt, font=\footnotesize},
+  fgdata/.default=2.4cm,
+  fgproc/.style={fgbase, rectangle, draw=fgLine, thick, fill=white, align=center,
+                 text width=#1, minimum height=0.9cm, inner sep=4pt,
+                 font=\footnotesize},
+  fgproc/.default=2.4cm,
+  fgout/.style={fgbase, trapezium, trapezium left angle=74, trapezium right angle=106,
+                trapezium stretches body, draw=fgLine, thick, fill=fgOut,
+                align=center, text width=#1, minimum height=0.85cm,
+                inner sep=3pt, font=\footnotesize},
+  fgout/.default=2.0cm,
+  fgeval/.style={fgbase, rectangle, draw=fgLine, thick, fill=fgEval, align=center,
+                 text width=#1, minimum height=0.9cm, inner xsep=9pt,
+                 inner ysep=4pt, font=\footnotesize,
+                 path picture={
+                   \draw[fgLine, thick]
+                     ([xshift=4pt]path picture bounding box.north west) --
+                     ([xshift=4pt]path picture bounding box.south west);
+                   \draw[fgLine, thick]
+                     ([xshift=-4pt]path picture bounding box.north east) --
+                     ([xshift=-4pt]path picture bounding box.south east);}},
+  fgeval/.default=3.0cm,
+  fgext/.style={fgbase, rectangle, draw=fgLine, thick, double, double distance=1.3pt,
+                fill=fgExt, align=center, text width=#1, minimum height=0.9cm,
+                inner sep=4pt, font=\footnotesize},
+  fgext/.default=3.0cm,
+  fgrq/.style={fgbase, rectangle, rounded corners=6pt, draw=fgLine, thick,
+               fill=white, align=center, text width=#1, inner sep=4pt,
+               font=\footnotesize},
+  fgrq/.default=3.0cm,
+  fgvar/.style={dashed},
+  fgflow/.style={-{Latex[length=2.2mm,width=1.7mm]}, thick, draw=fgLine},
+  fgaux/.style={-{Latex[length=2.2mm,width=1.7mm]}, thick, dashed, draw=fgLine},
+  fglabel/.style={fgbase, font=\scriptsize, fill=white, inner sep=1.5pt, align=center},
+  fggroup/.style={draw=fgLine!70, densely dotted, rounded corners=4pt,
+                  inner sep=5pt},
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% OTHER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{csquotes}
+\usepackage[nohyperlinks]{acronym}
+\usepackage[absolute]{textpos}
+
+\setkomafont{pageheadfoot}{\scshape}
+\addtokomafont{disposition}{\rmfamily}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRONT MATTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onehalfspacing
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+
+{\LARGE\bfseries
+Open and Operational Day-Ahead\\
+Electricity Price, Load, Solar,\\
+and Wind Forecasting
+\par}
+
+\vspace{2.6cm}
+
+{\large
+Zur Erlangung des akademischen Grades\\
+``Master of Science''\\
+(M.Sc.)
+\par}
+
+\vspace{1.0cm}
+
+{\large
+am Institut f\"ur Industriebetriebslehre und Industrielle Produktion (IIP)\\
+Lehrstuhl f\"ur Energiewirtschaft\\
+des Karlsruher Instituts f\"ur Technologie (KIT)
+\par}
+
+\vfill
+
+{\large
+von
+\par}
+
+\vspace{0.25cm}
+
+{\Large
+David Maximilian Eiglsperger
+\par}
+
+\vfill
+
+\begin{tabular}{@{}ll@{}}
+Datum der Abgabe: & 30.09.2026 \\
+1. Gutachter: & Prof. Dr. Wolf Fichtner \\
+2. Gutachter: & Prof. Dr. Frank Schultmann \\
+Betreuender Mitarbeiter: & Dr. Max Kleinebrahm \\
+\end{tabular}
+
+\end{center}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+
+\pagenumbering{roman}
+
+\section*{Abstract}
+\input{sections/00_abstract}
+
+\clearpage
+\tableofcontents
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{List of Abbreviations}
+\section*{List of Abbreviations}
+\input{sections/00_abbreviations}
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{List of Symbols}
+\section*{List of Symbols}
+\input{sections/00_symbols}
+\clearpage
+
+\pagenumbering{arabic}
+\pagestyle{headings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MAIN TEXT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{sections/01_introduction}
+\clearpage
+\input{sections/02_literature_review}
+\clearpage
+\input{sections/03_methodology}
+\clearpage
+\input{sections/04_results}
+\clearpage
+\input{sections/05_discussion}
+\clearpage
+\input{sections/06_conclusion}
+\clearpage
+\input{sections/07_appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DATA AND CODE AVAILABILITY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\thispagestyle{plain}
+\markboth{}{}
+\section*{Data and Code}
+\addcontentsline{toc}{section}{Data and Code}
+
+The operational forecasting pipeline developed in this thesis is publicly
+available at
+
+\begin{center}
+\url{https://github.com/davideig/DA_Price_Forecasting_DE_LU_Fundamental}
+\end{center}
+
+\noindent It provides the data-access integrations and endpoints, the
+preprocessing and modeling code, and the configuration files, so that open-data
+load, solar, wind, and day-ahead price forecasts for the \mbox{DE-LU} market can be
+generated and extended without building the data infrastructure from scratch.
+
+\noindent The resulting load, solar, wind, and day-ahead price forecasts are also
+submitted to Energy-Arena
+\cite{kleinebrahm2026energyarena} under the username
+\nolinkurl{Eiglsperger_2026}, using the benchmark's \enquote{open immediately} cooperative
+mode, so that other forecasters can download them before the target period is
+realized and reuse them, for example as members of forecast ensembles.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\pagestyle{plain}
+\printbibliography
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% STATUTORY DECLARATION (Selbststaendigkeitserklaerung)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\vspace*{4.0cm}
+
+\noindent
+\begin{sloppypar}
+Ich versichere wahrheitsgem\"a\ss, die Arbeit selbstst\"andig verfasst, alle
+benutzten Hilfsmittel vollst\"andig und genau angegeben und alles kenntlich
+gemacht zu haben, was aus Arbeiten anderer unver\"andert oder mit
+Ab\"anderungen entnommen wurde sowie die Satzung des KIT zur Sicherung guter
+wissenschaftlicher Praxis in der jeweils g\"ultigen Fassung beachtet zu haben.
+\end{sloppypar}
+
+\vspace{2.0cm}
+
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+Karlsruhe, den 30.09.2026
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.35\textwidth}
+\hrule
+\vspace{0.3cm}
+David Maximilian Eiglsperger
+\end{minipage}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ANLAGE: DECLARATION ON THE USE OF GENERATIVE AI (official KIT form)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+
+\noindent{\large\bfseries Anlage: Erkl\"arung zur Verwendung generativer
+KI-Systeme\par}
+
+\vspace{0.8cm}
+
+\noindent Bei der Erstellung der Arbeit habe ich die folgenden auf
+k\"unstlicher Intelligenz (KI) basierten Systeme benutzt:
+
+\vspace{0.4cm}
+\noindent
+\begin{tabular}{@{}ll@{}}
+1. & Claude (Anthropic) \\
+2. & Claude Code (Anthropic) \\
+3. & Codex (OpenAI) \\
+\end{tabular}
+
+\vspace{0.6cm}
+
+\noindent Ich erkl\"are weiterhin, dass ich
+
+\vspace{0.3cm}
+\noindent
+\begin{tabular}{@{}p{1.4em}p{0.90\textwidth}@{}}
+$\boxtimes$ & mich aktiv \"uber die Leistungsf\"ahigkeit und Beschr\"ankungen der
+oben genannten KI-Systeme informiert habe, \\[0.4em]
+$\boxtimes$ & \"uberpr\"uft habe, dass die mithilfe der oben genannten KI-Systeme
+generierten und von mir \"ubernommenen Inhalte faktisch richtig sind, \\[0.4em]
+$\boxtimes$ & mir bewusst bin, dass ich als Autor dieser Arbeit die Verantwortung
+f\"ur die in ihr gemachten Angaben und Aussagen trage. \\
+\end{tabular}
+
+\vspace{0.6cm}
+
+\noindent Die oben genannten KI-Systeme habe ich wie im Folgenden dargestellt
+eingesetzt.
+
+\vspace{0.3cm}
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}
+                    >{\raggedright\arraybackslash}p{0.19\textwidth}
+                    >{\raggedright\arraybackslash}p{0.49\textwidth}@{}}
+\toprule
+\textbf{Arbeitsschritt} & \textbf{Eingesetzte(s) KI-System(e)} &
+\textbf{Beschreibung der Verwendungsweise} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Arbeitsschritt} & \textbf{Eingesetzte(s) KI-System(e)} &
+\textbf{Beschreibung der Verwendungsweise} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Generierung von Ideen und Konzeption der Arbeit & Claude &
+Diskussion m\"oglicher Forschungsfragen und experimenteller Designs als
+Ausgangspunkt f\"ur eigene Entscheidungen \\
+\addlinespace
+Literatursuche & -- & -- \\
+\addlinespace
+Literaturanalyse & Claude & Unterst\"utzung beim Verst\"andnis spezifischer
+Methoden und Modelle \\
+\addlinespace
+Literaturverwaltung und Zitationsmanagement & Claude &
+\"Uberpr\"ufung von Referenzeintr\"agen auf formale Vollst\"andigkeit. Alle
+Zitate wurden selbstst\"andig auf Korrektheit gepr\"uft \\
+\addlinespace
+Auswahl von Methoden und Modellen & Claude, Claude Code &
+Diskussion geeigneter Prognosemethoden und Modellspezifikationen. Die finale
+Methodenauswahl wurde selbst getroffen \\
+\addlinespace
+Datensammlung und -analyse & Claude, Claude Code, Codex &
+Unterst\"utzung beim Verst\"andnis der ICON-D2-, \mbox{ENTSO-E}- und weiteren
+Open-Data-Strukturen. \"Uberpr\"ufung der Datenverarbeitungspipeline in Python \\
+\addlinespace
+Generierung von Programmcodes & Claude Code, Codex &
+Implementierung und \"Uberarbeitung der Skripte und Konfigurationen im
+Repository. Korrektur von LaTeX-Code. Fehlersuche und Optimierung bestehender
+Code-Abschnitte \\
+\addlinespace
+Erstellung von Visualisierungen & Claude, Claude Code &
+Unterst\"utzung bei Implementierung und Verbesserung von Abbildungen in Python
+und LaTeX \\
+\addlinespace
+Interpretation und Validierung & Claude &
+Diskussion von Modellergebnissen als Denkansatz. Die finale Interpretation und
+Validierung erfolgten selbstst\"andig \\
+\addlinespace
+Strukturierung des Texts der Arbeit & Claude &
+Vorschl\"age f\"ur Gliederung und Kapitelaufbau \\
+\addlinespace
+Formulierung des Texts der Arbeit & Claude &
+Erste Formulierungsideen und Umformulierung von W\"ortern und Abs\"atzen \\
+\addlinespace
+\"Ubersetzung des Texts der Arbeit & -- & -- \\
+\addlinespace
+Redigieren des Texts & Claude &
+Rechtschreib-, Grammatik- und Stilpr\"ufung sowie Konsistenzpr\"ufung. Alle
+Korrekturen wurden selbstst\"andig gepr\"uft und eigenverantwortlich
+\"ubernommen \\
+\addlinespace
+Vorbereitung der Pr\"asentation des Texts & -- & -- \\
+\addlinespace
+Sonstiges & -- & -- \\
+\end{longtable}
+
+\vspace{1.0cm}
+
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+Karlsruhe, den 30.09.2026
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.35\textwidth}
+\hrule
+\vspace{0.3cm}
+David Maximilian Eiglsperger
+\end{minipage}
+
+\clearpage
+
+\end{document}
