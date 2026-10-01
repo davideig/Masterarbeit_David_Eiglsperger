@@ -106,3 +106,18 @@ folders above. Process diagrams are TikZ files in the same folder.
   28 July 2026) were replaced by the 03 UTC run of the same day.
 - `docs/rerun_plan.md` documents the final leakage-free reruns and the checks
   applied to them.
+
+## Data sources
+
+The result files and `data/clustering/` contain values derived from the
+following sources. Reuse of these values is subject to the terms of the
+respective source.
+
+| Source | Used for | Terms |
+|---|---|---|
+| ENTSO-E Transparency Platform (transparency.entsoe.eu) | Day-ahead prices (incl. EXAA prices for Germany), realized load and generation, ENTSO-E load, solar, and wind forecasts | ENTSO-E Transparency Platform terms and conditions |
+| Deutscher Wetterdienst, DWD Open Data (opendata.dwd.de) | ICON-D2 weather forecasts | Datenbasis: Deutscher Wetterdienst, DWD terms of use |
+| Open-Meteo (open-meteo.com) | ICON-D2 single-run weather and hub-height wind fields | CC BY 4.0 |
+| Bundesnetzagentur, Marktstammdatenregister | Installed solar and wind capacity, capacity-weighted clusters | Datenlizenz Deutschland – Namensnennung – Version 2.0 (dl-de/by-2-0) |
+| Eurostat GISCO, population grid 2021 | Population weights of the load weather clusters | © European Union, Eurostat |
+| Regelleistung.net | Control-reserve auction results (FCR, aFRR, mFRR) | Regelleistung.net terms of use |
