@@ -21,7 +21,6 @@ alternative load model types or ENTSO-E error features).
 | `scripts/` | Experiment drivers and evaluation scripts used for the thesis tables |
 | `results/` | Outputs of the final thesis runs only (forecast CSVs, metrics, SHAP exports) |
 | `logs/` | Run logs of the final reruns and the measured reserve-market publication times |
-| `docs/` | Rerun plan of the final runs and the operational cutoff data specification |
 | `Final Paper/` | LaTeX source of the thesis, the submitted PDF, and the figure generators that read `results/` |
 | `data/clustering/` | ICON-D2 grid-cluster assignments used for the spatial weather aggregation |
 | `tests/` | Unit tests |
@@ -44,7 +43,7 @@ The output folder is the config's `export_dir`. API keys go in a local `.env`
 ## Thesis to repository map
 
 The test period is 1 February to 31 July 2026. All configs suffixed `_clean`
-are the leakage-free final reruns reported in the thesis.
+are the final runs reported in the thesis.
 
 ### RQ1: OBTF forecasts versus ENTSO-E (Table 5)
 
@@ -104,8 +103,16 @@ folders above. Process diagrams are TikZ files in the same folder.
   excluded for prices.
 - Three Open-Meteo ICON-D2 06 UTC runs without wind fields (13 May, 8 July,
   28 July 2026) were replaced by the 03 UTC run of the same day.
-- `docs/rerun_plan.md` documents the final leakage-free reruns and the checks
-  applied to them.
+- Information rules enforced in the final runs (configs suffixed `_clean`,
+  `icond2only`, and `configs/rq3_clean/`):
+  - Weather comes from ICON-D2 only. The 06 UTC runs of other weather
+    providers are published after 12:00 and are not used.
+  - The load, solar, and wind models are trained only on realized values that
+    were already published at the forecast creation time
+    (`target_availability_cutoff_hour` and `_minute`). The load model is
+    trained only on days with weather inputs (`require_weather_for_training`).
+  - The RQ3 cutoff models use the same model configurations as RQ1 and RQ2 and
+    realized data up to the last quarter-hour published at the start of each run.
 
 ## Data sources
 
