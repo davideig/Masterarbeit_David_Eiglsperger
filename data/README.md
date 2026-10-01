@@ -1,20 +1,15 @@
-# Data Directory
+# Data
 
-Heavy data is not part of the clean release repo.
+Only the cluster assignments used by the final thesis models are included.
+Each file maps the ICON-D2 grid points to spatial clusters.
 
-Expected local layout:
+| File | Used for |
+|---|---|
+| `clustering/icon_d2_clustering_c25.parquet` | 25 clusters of the OBTF load model (population-weighted weather) |
+| `clustering/icon_d2_mastr_solar_tso_c25.csv` | 25 capacity-weighted solar clusters per TSO proxy area |
+| `clustering/icon_d2_mastr_wind_c100.csv` | 100 capacity-weighted wind clusters including offshore |
+| `clustering/icon_d2_clustering_c{1,2,5,8,12,16,40,64,100}.parquet` | Weather clusters of the price model (two clusters in the final model, the others for the cluster sweep in Appendix A3.1) |
 
-```text
-data/
-  processed/
-  cache/
-  raw/
-```
-
-Use one of the following approaches:
-
-1. Download a prepared thesis feature pack and unpack it into `data/`.
-2. Rebuild the processed files with configs under `configs/preprocessing/`.
-3. Use sample data under `data/sample/` if provided by a release package.
-
-See `docs/data_catalog.md` for the required files per model.
+The raw and processed input data are not included (see the main README). When
+the pipeline runs, it expects them under `data/raw/` and `data/processed/` and
+writes API caches to `data/cache/`.
