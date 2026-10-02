@@ -1,4 +1,4 @@
-"""Subgroup SHAP shares (Table A7/A8 style) from long CSV or streaming npz output.
+"""Subgroup SHAP shares (Tables A6 and A7) from long CSV or streaming npz output.
 
 Share = mean_s |sum of contributions of the subgroup in sample s| divided by the
 sum over groups of mean_s |sum of contributions of the group in sample s|, i.e.

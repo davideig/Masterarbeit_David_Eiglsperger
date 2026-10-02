@@ -51,7 +51,9 @@ No API keys are needed, because all inputs are read from the unpacked files.
 Order: the price models read the load, solar, and wind forecasts from
 `results/`, so the component models come first. For RQ3,
 `bash scripts/run_rq3_clean.sh components` runs the component models and
-`bash scripts/run_rq3_clean.sh prices` the price models. A load, solar, or wind
+`bash scripts/run_rq3_clean.sh prices` the price models. The script skips every
+model whose `forecast.csv` already exists, so delete the `rq3_clean/` folders
+under `results/` first to rerun them. A load, solar, or wind
 run over the test period takes minutes to about one hour, a price model one to
 two hours.
 
