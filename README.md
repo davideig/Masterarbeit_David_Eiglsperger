@@ -25,20 +25,62 @@ alternative load model types or ENTSO-E error features).
 | `data/clustering/` | ICON-D2 grid-cluster assignments used for the spatial weather aggregation |
 | `tests/` | Unit tests |
 
-Raw and processed input data (ICON-D2 GRIB archives, ENTSO-E downloads,
-MaStR, aggregated weather features; about 70 GB) are not included. The
-fetch and preprocessing code is in `src/` and `configs/preprocessing/`.
+The model input files (aggregated weather features, ENTSO-E series,
+reserve-market features; 1.1 GB) are provided as a separate download, see
+below. The raw sources they were built from (ICON-D2 GRIB archives, the MaStR
+export, ENTSO-E downloads) are not included. The code that builds the input
+files from them is in `src/` and `configs/preprocessing/`.
 
-## Running a model
+## Rerunning the models
 
-Every model run is one config:
+1. Download `thesis_model_inputs.zip` from the release
+   `thesis-submission-2026-09-30` on the Releases page of this repository and
+   unpack it in the repository root. It creates `data/processed/`.
+2. Install [pixi](https://pixi.sh). The environment is created on the first run.
+3. Run a model. Every model run is one config:
 
-```
-pixi run -e forecast da-price-forecast --config <config.yaml>
-```
+   ```
+   pixi run -e forecast da-price-forecast --config <config.yaml>
+   ```
 
-The output folder is the config's `export_dir`. API keys go in a local `.env`
-(template: `.env.example`).
+   The output folder is the config's `export_dir`, so a rerun overwrites the
+   stored result of that config.
+
+No API keys are needed, because all inputs are read from the unpacked files.
+
+Order: the price models read the load, solar, and wind forecasts from
+`results/`, so the component models come first. For RQ3,
+`bash scripts/run_rq3_clean.sh components` runs the component models and
+`bash scripts/run_rq3_clean.sh prices` the price models. A load, solar, or wind
+run over the test period takes minutes to about one hour, a price model one to
+two hours.
+
+Without the input files, the following still run: both evaluation configs
+(`configs/final/benchmarks/evaluation_*.yaml`), `scripts/eval_wind_rq1.py`,
+`scripts/rq3_clean_eval.py`, and the unit tests (`pixi run test`). They read
+only the stored results.
+
+### Reproducibility
+
+Reruns with the input files reproduce the stored forecasts exactly. This was
+checked on slices of the test period for every model type (load in both modes,
+solar, wind, the ENTSO-E benchmark, P_gen, the RQ3 component and price models,
+and the EXAA-only benchmark).
+
+The one exception is P_base. The thesis run of P_base predates a later change in
+the price-model code, so a rerun gives slightly different forecasts with the
+same accuracy:
+
+| | Thesis | Rerun |
+|---|---|---|
+| P_base RMSE (EUR/MWh) | 35.50 | 35.49 |
+| P_base MAE (EUR/MWh) | 20.82 | 20.80 |
+| P_gen relative to P_base | -11.2% | -11.1% |
+| P_gen without raw weather relative to P_base | -10.5% | -10.4% |
+
+All Giacomini-White p-values of Table 6 remain below 0.001. The thesis forecast
+is kept in `results/price_forecast_results/pricebase/stage4_oos/oos_pbase_c2_d70/`
+and the rerun in `oos_pbase_c2_d70_rerun/` next to it.
 
 ## Thesis to repository map
 

@@ -10,6 +10,6 @@ Each file maps the ICON-D2 grid points to spatial clusters.
 | `clustering/icon_d2_mastr_wind_c100.csv` | 100 capacity-weighted wind clusters including offshore |
 | `clustering/icon_d2_clustering_c{1,2,5,8,12,16,40,64,100}.parquet` | Weather clusters of the price model (two clusters in the final model, the others for the cluster sweep in Appendix A3.1) |
 
-The raw and processed input data are not included (see the main README). When
-the pipeline runs, it expects them under `data/raw/` and `data/processed/` and
-writes API caches to `data/cache/`.
+The model input files are a separate download (`thesis_model_inputs.zip`, see
+"Rerunning the models" in the main README). Unpacked in the repository root,
+they go to `data/processed/`.
